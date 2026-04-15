@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: #A48742;
+  --color-gold-light: #C4A865;
+  --color-gold-dark: #7A6530;
+  --color-forest: #00221E;
+  --color-forest-light: #003A33;
+  --color-cream: #F5F1E8;
+  --color-off-black: #1A1A1A;
+  --color-off-white: #FAFAFA;
+
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base styles */
+body {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A48742;
+  border-radius: 4px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(164, 135, 66, 0.3);
+  color: #FFFFFF;
+}
+
+/* Gold divider utility */
+.gold-divider {
+  width: 80px;
+  height: 1px;
+  background: #A48742;
+  margin: 1.5rem auto;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* Input styles */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #A48742;
+  box-shadow: 0 0 0 1px #A48742;
 }
