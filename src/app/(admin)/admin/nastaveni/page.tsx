@@ -1,10 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { Settings, Save } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Save } from "lucide-react";
 
-export default function AdminSettingsPage() {
+export default function NastaveniPage() {
   const [saved, setSaved] = useState(false);
+  const [storeName, setStoreName] = useState("Wood & Steak");
+  const [storeDescription, setStoreDescription] = useState(
+    "Premiovy cesky steakhouse - e-shop s masem, omackami a vybavenim"
+  );
+  const [email, setEmail] = useState("info@woodandsteak.cz");
+  const [phone, setPhone] = useState("+420 222 333 444");
+  const [street, setStreet] = useState("Dlouha 12");
+  const [city, setCity] = useState("Praha 1");
+  const [zip, setZip] = useState("110 00");
+
+  const [deliveryAreas, setDeliveryAreas] = useState(
+    "Praha 1-10, Brno, Plzen, Ostrava"
+  );
+  const [minOrder, setMinOrder] = useState("500");
+  const [freeShippingFrom, setFreeShippingFrom] = useState("2000");
+  const [shippingCost, setShippingCost] = useState("149");
+
+  const [instagram, setInstagram] = useState(
+    "https://instagram.com/woodandsteak"
+  );
+  const [facebook, setFacebook] = useState(
+    "https://facebook.com/woodandsteak"
+  );
+  const [tiktok, setTiktok] = useState("");
 
   const handleSave = () => {
     setSaved(true);
@@ -12,94 +37,213 @@ export default function AdminSettingsPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-3">
-          <Settings className="w-6 h-6 text-gold" strokeWidth={1.5} />
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
           <h1 className="font-heading text-2xl text-white">Nastaveni</h1>
+          <p className="mt-1 text-sm text-white/50 font-body">
+            Konfigurace obchodu a kontaktnich udaju
+          </p>
         </div>
         <button
           onClick={handleSave}
-          className="flex items-center gap-2 px-6 py-2.5 bg-gold text-black font-body text-sm font-semibold tracking-wider uppercase hover:bg-gold-light transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-gold px-6 py-2.5 text-sm font-body font-medium text-black transition-colors hover:bg-gold-light"
         >
-          <Save className="w-4 h-4" strokeWidth={1.5} />
-          {saved ? "Ulozeno!" : "Ulozit"}
+          <Save size={16} />
+          {saved ? "Ulozeno!" : "Ulozit nastaveni"}
         </button>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         {/* Store info */}
-        <div className="bg-off-black border border-gold/10 p-6">
-          <h2 className="font-heading text-lg text-gold mb-4">Informace o obchodu</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl border border-gold/10 bg-off-black p-6">
+          <h2 className="mb-4 font-heading text-lg text-white">
+            Informace o obchodu
+          </h2>
+          <div className="space-y-4">
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Nazev</label>
-              <input defaultValue="Wood & Steak" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Nazev obchodu
+              </label>
+              <input
+                type="text"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">ICO</label>
-              <input defaultValue="XXXXXXXX" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
-            </div>
-            <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Adresa</label>
-              <input defaultValue="Vinohrady, Praha 2" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
-            </div>
-            <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">PSC</label>
-              <input defaultValue="120 00" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Popis obchodu
+              </label>
+              <textarea
+                rows={3}
+                value={storeDescription}
+                onChange={(e) => setStoreDescription(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white resize-none"
+              />
             </div>
           </div>
         </div>
 
         {/* Contact */}
-        <div className="bg-off-black border border-gold/10 p-6">
-          <h2 className="font-heading text-lg text-gold mb-4">Kontakt</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl border border-gold/10 bg-off-black p-6">
+          <h2 className="mb-4 font-heading text-lg text-white">
+            Kontaktni udaje
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Email</label>
-              <input defaultValue="info@woodandsteak.cz" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                E-mail
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Telefon</label>
-              <input defaultValue="+420 XXX XXX XXX" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Telefon
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Ulice
+              </label>
+              <input
+                type="text"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="mb-1.5 block text-sm font-body text-white/60">
+                  Mesto
+                </label>
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-body text-white/60">
+                  PSC
+                </label>
+                <input
+                  type="text"
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+                />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Delivery */}
-        <div className="bg-off-black border border-gold/10 p-6">
-          <h2 className="font-heading text-lg text-gold mb-4">Doruceni</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Minimalni objednavka (Kc)</label>
-              <input type="number" defaultValue={500} className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+        <div className="rounded-xl border border-gold/10 bg-off-black p-6">
+          <h2 className="mb-4 font-heading text-lg text-white">
+            Doruceni a objednavky
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Oblasti doruceni
+              </label>
+              <input
+                type="text"
+                value={deliveryAreas}
+                onChange={(e) => setDeliveryAreas(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Cena dopravy (Kc)</label>
-              <input type="number" defaultValue={0} className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Minimalni objednavka (Kc)
+              </label>
+              <input
+                type="number"
+                value={minOrder}
+                onChange={(e) => setMinOrder(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
-            <div className="md:col-span-2">
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Oblasti rozvozu (oddelene carkou)</label>
-              <input defaultValue="Praha a okoli, Praha-vychod, Mlada Boleslav, Kladno, Melnik, Nymburk" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+            <div>
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Doprava zdarma od (Kc)
+              </label>
+              <input
+                type="number"
+                value={freeShippingFrom}
+                onChange={(e) => setFreeShippingFrom(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Cena dopravy (Kc)
+              </label>
+              <input
+                type="number"
+                value={shippingCost}
+                onChange={(e) => setShippingCost(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
           </div>
         </div>
 
-        {/* Social */}
-        <div className="bg-off-black border border-gold/10 p-6">
-          <h2 className="font-heading text-lg text-gold mb-4">Socialni site</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Social links */}
+        <div className="rounded-xl border border-gold/10 bg-off-black p-6">
+          <h2 className="mb-4 font-heading text-lg text-white">
+            Socialni site
+          </h2>
+          <div className="space-y-4">
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Instagram</label>
-              <input defaultValue="https://instagram.com/woodandsteak" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Instagram
+              </label>
+              <input
+                type="url"
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Facebook</label>
-              <input defaultValue="" placeholder="https://facebook.com/..." className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                Facebook
+              </label>
+              <input
+                type="url"
+                value={facebook}
+                onChange={(e) => setFacebook(e.target.value)}
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
+              />
             </div>
             <div>
-              <label className="block font-body text-xs text-white/40 uppercase tracking-wider mb-1">Web restaurace</label>
-              <input defaultValue="https://www.woodandsteak.cz/" className="w-full px-3 py-2 bg-black border border-gold/20 text-white font-body text-sm focus:border-gold transition-colors" />
+              <label className="mb-1.5 block text-sm font-body text-white/60">
+                TikTok
+              </label>
+              <input
+                type="url"
+                value={tiktok}
+                onChange={(e) => setTiktok(e.target.value)}
+                placeholder="https://tiktok.com/@woodandsteak"
+                className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white placeholder:text-white/30"
+              />
             </div>
           </div>
         </div>
