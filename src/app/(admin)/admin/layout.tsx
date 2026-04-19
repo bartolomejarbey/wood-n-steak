@@ -12,6 +12,7 @@ import {
   Users,
   Mail,
   Settings,
+  Palette,
   Menu,
   X,
 } from "lucide-react";
@@ -23,6 +24,7 @@ const sidebarLinks = [
   { href: "/admin/objednavky", label: "Objednávky", icon: ShoppingCart },
   { href: "/admin/zakaznici", label: "Zákazníci", icon: Users },
   { href: "/admin/newsletter", label: "Newsletter", icon: Mail },
+  { href: "/admin/vzhled", label: "Vzhled webu", icon: Palette },
   { href: "/admin/nastaveni", label: "Nastavení", icon: Settings },
 ];
 
@@ -52,14 +54,20 @@ export default function AdminLayout({
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-off-black transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-forest transition-transform duration-300 lg:static lg:translate-x-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         {/* Logo */}
         <div className="flex h-16 items-center justify-between border-b border-gold/10 px-6">
-          <Link href="/admin" className="font-heading text-xl text-gold">
-            W&S Admin
+          <Link href="/admin" className="inline-flex items-baseline" aria-label="W&S Admin">
+            <span className="font-heading text-lg font-bold tracking-[0.08em] text-white">
+              WOOD
+            </span>
+            <span className="font-heading text-lg font-bold text-gold mx-1">&amp;</span>
+            <span className="font-heading text-lg font-bold tracking-[0.08em] text-white">
+              STEAK
+            </span>
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -80,10 +88,10 @@ export default function AdminLayout({
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-body transition-colors",
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-body transition-colors border-l-2",
                   active
-                    ? "bg-gold/10 text-gold"
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                    ? "bg-gold/10 text-gold border-gold"
+                    : "text-white/60 hover:bg-white/5 hover:text-white border-transparent"
                 )}
               >
                 <Icon size={18} className={active ? "text-gold" : "text-gold/60"} />

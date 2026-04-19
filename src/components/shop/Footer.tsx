@@ -1,6 +1,18 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import { Mail, ExternalLink } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
+import {
+  InstagramIcon,
+  FacebookIcon,
+  TikTokIcon,
+  VisaIcon,
+  MastercardIcon,
+  ApplePayIcon,
+  GooglePayIcon,
+} from "@/components/ui/SocialIcons";
 
 const categoryLinks = [
   { label: "Steaky", href: "/sortiment/steaky" },
@@ -13,149 +25,222 @@ const categoryLinks = [
 
 const infoLinks = [
   { label: "Jak nakupovat", href: "/jak-nakupovat" },
-  { label: "Obchodní podmínky", href: "/obchodni-podminky" },
-  { label: "Kontakt", href: "/kontakt" },
   { label: "O restauraci", href: "/o-restauraci" },
+  { label: "Kontakt", href: "/kontakt" },
+  { label: "Obchodní podmínky", href: "/obchodni-podminky" },
+  { label: "Ochrana osobních údajů", href: "/ochrana-osobnich-udaju" },
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubscribe(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      toast.error("Zadejte prosím platný e-mail");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        toast.success("Děkujeme za přihlášení k odběru");
+        setEmail("");
+      } else {
+        toast.error("Přihlášení se nepodařilo");
+      }
+    } catch {
+      toast.error("Zkuste to prosím znovu");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <footer className="bg-forest border-t border-gold/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-forest text-white">
+      {/* Newsletter banner */}
+      <div className="bg-black border-t border-b border-gold/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <p className="overline mb-2">Newsletter</p>
+              <h3 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight">
+                Premium steaky přímo do e-mailu
+              </h3>
+              <p className="mt-2 text-sm text-white/60 max-w-lg">
+                Tipy na přípravu, nové kousky na skladě a občas sleva, která za to stojí.
+              </p>
+            </div>
+            <form
+              onSubmit={handleSubscribe}
+              className="flex w-full max-w-lg lg:ml-auto border border-gold/40 bg-black/40 focus-within:border-gold transition-colors"
+            >
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="vas@email.cz"
+                aria-label="E-mail pro odběr novinek"
+                className="flex-1 bg-transparent px-4 py-3 text-sm placeholder:text-white/30 focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-gold text-black px-5 py-3 text-xs tracking-[0.15em] uppercase font-medium hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center gap-2"
+              >
+                {loading ? "Odesílám…" : "Přihlásit"}
+                {!loading && <ArrowRight className="w-4 h-4" aria-hidden />}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Main footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div>
-            <Image
-              src="/images/logo.png"
-              alt="Wood & Steak"
-              width={140}
-              height={99}
-              className="h-12 w-auto mb-4 opacity-80"
-            />
-            <p className="text-white/50 text-sm font-body leading-relaxed mb-4">
-              Prémiové maso a domácí omáčky z restaurace
-              Wood&nbsp;&amp;&nbsp;Steak. Steakhouse ve Vinohradech nedaleko
-              Náměstí Míru.
+            <Link href="/" className="inline-flex items-baseline" aria-label="Wood & Steak — domů">
+              <span className="font-heading text-2xl font-bold tracking-[0.08em] text-white">
+                WOOD
+              </span>
+              <span className="font-heading text-2xl font-bold text-gold mx-1">&amp;</span>
+              <span className="font-heading text-2xl font-bold tracking-[0.08em] text-white">
+                STEAK
+              </span>
+            </Link>
+            <div className="gold-divider ml-0 mr-auto" />
+            <p className="mt-5 text-sm text-white/60 leading-relaxed">
+              Prémiové maso, domácí omáčky a vybavení pro přípravu steaku jako z restaurace.
             </p>
-            <p className="text-white/40 text-sm font-body">
-              Vinohrady, Praha 2
-            </p>
-          </div>
-
-          {/* Sortiment */}
-          <div>
-            <h4 className="font-heading text-sm tracking-[0.2em] uppercase text-gold mb-6">
-              Sortiment
-            </h4>
-            <ul className="space-y-3">
-              {categoryLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/50 hover:text-gold transition-colors font-body"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Info */}
-          <div>
-            <h4 className="font-heading text-sm tracking-[0.2em] uppercase text-gold mb-6">
-              Informace
-            </h4>
-            <ul className="space-y-3">
-              {infoLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/50 hover:text-gold transition-colors font-body"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="font-heading text-sm tracking-[0.2em] uppercase text-gold mb-6">
-              Sledujte nás
-            </h4>
-            <div className="flex gap-4 mb-6">
+            <div className="mt-6 flex gap-3">
               <a
                 href="https://www.instagram.com/woodandsteak/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 border border-gold/30 rounded-xl flex items-center justify-center text-gold/70 hover:bg-gold hover:text-black transition-all"
                 aria-label="Instagram"
+                className="w-10 h-10 border border-gold/30 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://www.facebook.com/woodandsteak/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 border border-gold/30 rounded-xl flex items-center justify-center text-gold/70 hover:bg-gold hover:text-black transition-all"
                 aria-label="Facebook"
+                className="w-10 h-10 border border-gold/30 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
+                <FacebookIcon className="w-4 h-4" />
               </a>
               <a
-                href="mailto:info@woodandsteak.cz"
-                className="w-10 h-10 border border-gold/30 rounded-xl flex items-center justify-center text-gold/70 hover:bg-gold hover:text-black transition-all"
-                aria-label="Email"
+                href="https://www.tiktok.com/@woodandsteak"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="w-10 h-10 border border-gold/30 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all"
               >
-                <Mail className="w-4 h-4" strokeWidth={1.5} />
+                <TikTokIcon className="w-4 h-4" />
               </a>
             </div>
-            <p className="text-sm text-white/50 font-body">
-              info@woodandsteak.cz
-            </p>
-            <p className="text-sm text-white/50 font-body">
-              +420 XXX XXX XXX
-            </p>
+          </div>
+
+          {/* Sortiment */}
+          <div>
+            <h4 className="overline mb-5 text-gold">Sortiment</h4>
+            <ul className="space-y-3">
+              {categoryLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/60 hover:text-gold transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Informace */}
+          <div>
+            <h4 className="overline mb-5 text-gold">Informace</h4>
+            <ul className="space-y-3">
+              {infoLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/60 hover:text-gold transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Kontakt */}
+          <div>
+            <h4 className="overline mb-5 text-gold">Kontakt</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3 text-white/70">
+                <MapPin className="w-4 h-4 text-gold mt-0.5 flex-none" strokeWidth={1.5} />
+                <span>
+                  Wood &amp; Steak
+                  <br />
+                  Vinohrady, Praha 2
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-gold flex-none" strokeWidth={1.5} />
+                <a
+                  href="tel:+420725724540"
+                  className="text-white/70 hover:text-gold transition-colors"
+                >
+                  +420 725 724 540
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-gold flex-none" strokeWidth={1.5} />
+                <a
+                  href="mailto:info@woodandsteak.cz"
+                  className="text-white/70 hover:text-gold transition-colors"
+                >
+                  info@woodandsteak.cz
+                </a>
+              </li>
+            </ul>
+            <div className="mt-6 text-xs text-white/40 leading-relaxed">
+              <p>Po–Pá 11:00–22:00</p>
+              <p>So–Ne 12:00–22:00</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/30 font-body">
-            &copy; {new Date().getFullYear()} Wood&nbsp;&amp;&nbsp;Steak.
-            Všechny ceny uvedeny s DPH.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              href="/obchodni-podminky"
-              className="text-xs text-white/30 hover:text-gold transition-colors font-body"
-            >
-              Obchodní podmínky
-            </Link>
-            <Link
-              href="/kontakt"
-              className="text-xs text-white/30 hover:text-gold transition-colors font-body"
-            >
-              Kontakt
-            </Link>
+      {/* Bottom bar */}
+      <div className="border-t border-gold/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          <div className="text-xs text-white/40 space-y-1">
+            <p>
+              &copy; {new Date().getFullYear()} Wood &amp; Steak s.r.o. · Všechny ceny s DPH
+            </p>
+            <p>IČO: 00000000 · DIČ: CZ00000000</p>
+          </div>
+          <div className="flex items-center gap-4 text-white/60">
+            <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 mr-1">
+              Platby
+            </span>
+            <VisaIcon className="h-5 w-auto" />
+            <MastercardIcon className="h-5 w-auto" />
+            <ApplePayIcon className="h-4 w-auto" />
+            <GooglePayIcon className="h-4 w-auto" />
           </div>
         </div>
       </div>
