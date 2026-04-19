@@ -24,8 +24,8 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
     data.paymentMethod === "comgate"
       ? "Kartou online"
       : data.paymentMethod === "bank_transfer"
-        ? "Bankovni prevod"
-        : "Dobirka";
+        ? "Bankovní převod"
+        : "Dobírka";
 
   return `
 <!DOCTYPE html>
@@ -57,17 +57,17 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
       <div class="logo">WOOD <span>&</span> STEAK</div>
     </div>
     <div class="content">
-      <h1>Dekujeme za objednavku!</h1>
-      <p>Dobry den, ${data.firstName},</p>
-      <p>vase objednavka byla uspesne prijata.</p>
-      <p class="order-number">Cislo objednavky: ${data.orderNumber}</p>
+      <h1>Děkujeme za objednávku!</h1>
+      <p>Dobrý den, ${data.firstName},</p>
+      <p>vaše objednávka byla úspěšně přijata.</p>
+      <p class="order-number">Číslo objednávky: ${data.orderNumber}</p>
 
-      <h2>Polozky objednavky</h2>
+      <h2>Položky objednávky</h2>
       <table>
         <thead>
           <tr>
             <th>Produkt</th>
-            <th>Mnozstvi</th>
+            <th>Množství</th>
             <th style="text-align:right">Cena</th>
           </tr>
         </thead>
@@ -78,40 +78,40 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
           <tr>
             <td>${item.name}</td>
             <td>${item.quantity}x</td>
-            <td style="text-align:right">${item.totalPrice} Kc</td>
+            <td style="text-align:right">${item.totalPrice} Kč</td>
           </tr>`
             )
             .join("")}
           <tr>
             <td colspan="2">Doprava</td>
-            <td style="text-align:right">${data.shippingCost === 0 ? "ZDARMA" : data.shippingCost + " Kc"}</td>
+            <td style="text-align:right">${data.shippingCost === 0 ? "ZDARMA" : data.shippingCost + " Kč"}</td>
           </tr>
           <tr class="total-row">
             <td colspan="2">Celkem</td>
-            <td style="text-align:right">${data.total} Kc</td>
+            <td style="text-align:right">${data.total} Kč</td>
           </tr>
         </tbody>
       </table>
 
-      <h2>Dorucovaci adresa</h2>
+      <h2>Doručovací adresa</h2>
       <p>${data.shippingStreet}<br>${data.shippingCity}, ${data.shippingZip}</p>
 
-      <h2>Zpusob platby</h2>
+      <h2>Způsob platby</h2>
       <p>${paymentLabel}</p>
 
       ${
         data.qrCodeDataUrl && data.paymentMethod === "bank_transfer"
           ? `
       <div class="qr-section">
-        <h2 style="margin-top:0">QR kod pro platbu</h2>
+        <h2 style="margin-top:0">QR kód pro platbu</h2>
         <img src="${data.qrCodeDataUrl}" alt="QR platba" width="200" height="200" />
-        <p style="font-size:12px;margin-top:10px">Naskenujte QR kod v bankovni aplikaci</p>
+        <p style="font-size:12px;margin-top:10px">Naskenujte QR kód v bankovní aplikaci</p>
       </div>`
           : ""
       }
 
-      <p style="margin-top:30px">Budeme vas kontaktovat ohledne doruceni.</p>
-      <p>S pozdravem,<br>tym Wood & Steak</p>
+      <p style="margin-top:30px">Budeme vás kontaktovat ohledně doručení.</p>
+      <p>S pozdravem,<br>tým Wood & Steak</p>
     </div>
     <div class="footer">
       <p>Wood & Steak | Vinohrady, Praha 2</p>

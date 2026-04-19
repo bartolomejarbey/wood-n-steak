@@ -20,10 +20,10 @@ const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/produkty", label: "Produkty", icon: Package },
   { href: "/admin/kategorie", label: "Kategorie", icon: FolderOpen },
-  { href: "/admin/objednavky", label: "Objednavky", icon: ShoppingCart },
-  { href: "/admin/zakaznici", label: "Zakaznici", icon: Users },
+  { href: "/admin/objednavky", label: "Objednávky", icon: ShoppingCart },
+  { href: "/admin/zakaznici", label: "Zákazníci", icon: Users },
   { href: "/admin/newsletter", label: "Newsletter", icon: Mail },
-  { href: "/admin/nastaveni", label: "Nastaveni", icon: Settings },
+  { href: "/admin/nastaveni", label: "Nastavení", icon: Settings },
 ];
 
 export default function AdminLayout({

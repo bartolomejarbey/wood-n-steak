@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import {
   getCategories,
   getCategoryBySlug,
@@ -67,9 +67,9 @@ export default function CategoryPage() {
           </h1>
           <Link
             href="/sortiment"
-            className="font-body text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-black transition-all duration-200 text-sm"
+            className="font-body text-gold text-sm hover:text-gold-light transition-colors"
           >
-            Zpet na sortiment
+            Zpět na sortiment
           </Link>
         </div>
       </main>
@@ -79,21 +79,18 @@ export default function CategoryPage() {
   return (
     <main className="min-h-screen bg-off-black">
       {/* Hero */}
-      <section className="relative py-20 bg-forest">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      <section className="relative py-20 sm:py-24 bg-gradient-to-b from-forest via-forest to-off-black">
+        <div className="relative max-w-7xl mx-auto px-4 text-center">
           {/* Breadcrumb */}
           <nav className="mb-6">
-            <ol className="flex items-center justify-center gap-2 font-heading text-sm italic text-cream/50">
+            <ol className="flex items-center justify-center gap-2 font-body text-xs text-white/35">
               <li>
-                <Link
-                  href="/sortiment"
-                  className="hover:text-gold transition-colors"
-                >
+                <Link href="/sortiment" className="hover:text-gold transition-colors">
                   Sortiment
                 </Link>
               </li>
-              <li className="text-gold/40">/</li>
-              <li className="text-gold">{category.name}</li>
+              <li className="text-white/20">/</li>
+              <li className="text-gold/70">{category.name}</li>
             </ol>
           </nav>
 
@@ -101,7 +98,7 @@ export default function CategoryPage() {
             {category.name}
           </h1>
           {category.description && (
-            <p className="mt-4 font-body text-cream/60 text-lg max-w-xl mx-auto">
+            <p className="mt-4 font-body text-cream/50 text-base max-w-md mx-auto">
               {category.description}
             </p>
           )}
@@ -112,23 +109,23 @@ export default function CategoryPage() {
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Sidebar - desktop */}
           <aside className="hidden lg:block w-56 flex-shrink-0">
-            <h2 className="font-heading text-cream text-lg mb-4">Kategorie</h2>
-            <div className="flex flex-col gap-2">
+            <h2 className="font-body text-white/30 text-xs tracking-[0.2em] uppercase mb-4">Kategorie</h2>
+            <div className="flex flex-col gap-1">
               <Link
                 href="/sortiment"
-                className="text-left px-4 py-2 text-sm font-body border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-200"
+                className="text-left px-4 py-2.5 text-sm font-body rounded-lg text-white/50 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
-                Vse
+                Vše
               </Link>
               {categories.map((cat) => (
                 <Link
                   key={cat.id}
                   href={`/sortiment/${cat.slug}`}
                   className={cn(
-                    "text-left px-4 py-2 text-sm font-body border transition-all duration-200",
+                    "text-left px-4 py-2.5 text-sm font-body rounded-lg transition-all duration-200",
                     cat.slug === slug
-                      ? "bg-gold text-black border-gold"
-                      : "border-gold text-gold hover:bg-gold hover:text-black"
+                      ? "bg-gold/10 text-gold border-l-2 border-gold"
+                      : "text-white/50 hover:text-white hover:bg-white/[0.03]"
                   )}
                 >
                   {cat.name}
@@ -140,49 +137,50 @@ export default function CategoryPage() {
           {/* Main content */}
           <div className="flex-1">
             {/* Search + sort bar */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              {/* Search */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gold/50" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
                 <input
                   type="text"
                   placeholder="Hledat v kategorii..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-transparent border border-gold/30 text-cream font-body text-sm placeholder:text-cream/30 focus:border-gold focus:outline-none transition-colors"
+                  className="w-full pl-11 pr-4 py-2.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-cream font-body text-sm placeholder:text-white/25 focus:border-gold/40 focus:outline-none transition-colors"
                 />
               </div>
 
-              {/* Sort */}
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value as SortOption)}
-                className="px-4 py-2.5 bg-off-black border border-gold/30 text-cream font-body text-sm focus:border-gold focus:outline-none cursor-pointer appearance-none"
-              >
-                <option value="newest">Nejnovejsi</option>
-                <option value="price_asc">Cena vzestupne</option>
-                <option value="price_desc">Cena sestupne</option>
-                <option value="name">Podle nazvu</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as SortOption)}
+                  className="w-full sm:w-auto px-4 py-2.5 pr-10 bg-white/[0.03] border border-white/[0.08] rounded-xl text-cream font-body text-sm focus:border-gold/40 focus:outline-none cursor-pointer appearance-none"
+                >
+                  <option value="newest">Nejnovější</option>
+                  <option value="price_asc">Cena vzestupně</option>
+                  <option value="price_desc">Cena sestupně</option>
+                  <option value="name">Podle názvu</option>
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+              </div>
             </div>
 
             {/* Mobile category filters */}
-            <div className="flex lg:hidden gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+            <div className="flex lg:hidden gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide -mx-1 px-1">
               <Link
                 href="/sortiment"
-                className="flex-shrink-0 px-4 py-2 text-xs font-body border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-200"
+                className="flex-shrink-0 px-4 py-2 text-xs font-body rounded-full bg-white/[0.04] text-white/50 hover:text-white transition-all duration-200"
               >
-                Vse
+                Vše
               </Link>
               {categories.map((cat) => (
                 <Link
                   key={cat.id}
                   href={`/sortiment/${cat.slug}`}
                   className={cn(
-                    "flex-shrink-0 px-4 py-2 text-xs font-body border transition-all duration-200",
+                    "flex-shrink-0 px-4 py-2 text-xs font-body rounded-full transition-all duration-200",
                     cat.slug === slug
-                      ? "bg-gold text-black border-gold"
-                      : "border-gold text-gold hover:bg-gold hover:text-black"
+                      ? "bg-gold text-black"
+                      : "bg-white/[0.04] text-white/50 hover:text-white"
                   )}
                 >
                   {cat.name}
@@ -190,20 +188,25 @@ export default function CategoryPage() {
               ))}
             </div>
 
+            {/* Product count */}
+            <p className="font-body text-white/20 text-xs mb-5">
+              {filteredProducts.length} {filteredProducts.length === 1 ? "produkt" : filteredProducts.length < 5 ? "produkty" : "produktů"}
+            </p>
+
             {/* Product grid */}
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
               <div className="text-center py-20">
-                <p className="font-heading text-cream/40 text-lg">
-                  Zadne produkty nebyly nalezeny
+                <p className="font-heading text-white/30 text-lg">
+                  Žádné produkty nebyly nalezeny
                 </p>
-                <p className="font-body text-cream/25 text-sm mt-2">
-                  Zkuste zmenit vyhledavaci dotaz
+                <p className="font-body text-white/20 text-sm mt-2">
+                  Zkuste změnit vyhledávací dotaz
                 </p>
               </div>
             )}

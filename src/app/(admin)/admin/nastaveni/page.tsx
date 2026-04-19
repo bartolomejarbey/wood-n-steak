@@ -1,23 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import { Save } from "lucide-react";
 
 export default function NastaveniPage() {
   const [saved, setSaved] = useState(false);
   const [storeName, setStoreName] = useState("Wood & Steak");
   const [storeDescription, setStoreDescription] = useState(
-    "Premiovy cesky steakhouse - e-shop s masem, omackami a vybavenim"
+    "Prémiový český steakhouse - e-shop s masem, omáčkami a vybavením"
   );
   const [email, setEmail] = useState("info@woodandsteak.cz");
   const [phone, setPhone] = useState("+420 222 333 444");
-  const [street, setStreet] = useState("Dlouha 12");
+  const [street, setStreet] = useState("Dlouhá 12");
   const [city, setCity] = useState("Praha 1");
   const [zip, setZip] = useState("110 00");
 
   const [deliveryAreas, setDeliveryAreas] = useState(
-    "Praha 1-10, Brno, Plzen, Ostrava"
+    "Praha 1-10, Brno, Plzeň, Ostrava"
   );
   const [minOrder, setMinOrder] = useState("500");
   const [freeShippingFrom, setFreeShippingFrom] = useState("2000");
@@ -40,9 +39,9 @@ export default function NastaveniPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-heading text-2xl text-white">Nastaveni</h1>
+          <h1 className="font-heading text-2xl text-white">Nastavení</h1>
           <p className="mt-1 text-sm text-white/50 font-body">
-            Konfigurace obchodu a kontaktnich udaju
+            Konfigurace obchodu a kontaktních údajů
           </p>
         </div>
         <button
@@ -50,7 +49,7 @@ export default function NastaveniPage() {
           className="inline-flex items-center gap-2 rounded-lg bg-gold px-6 py-2.5 text-sm font-body font-medium text-black transition-colors hover:bg-gold-light"
         >
           <Save size={16} />
-          {saved ? "Ulozeno!" : "Ulozit nastaveni"}
+          {saved ? "Uloženo!" : "Uložit nastavení"}
         </button>
       </div>
 
@@ -63,7 +62,7 @@ export default function NastaveniPage() {
           <div className="space-y-4">
             <div>
               <label className="mb-1.5 block text-sm font-body text-white/60">
-                Nazev obchodu
+                Název obchodu
               </label>
               <input
                 type="text"
@@ -89,7 +88,7 @@ export default function NastaveniPage() {
         {/* Contact */}
         <div className="rounded-xl border border-gold/10 bg-off-black p-6">
           <h2 className="mb-4 font-heading text-lg text-white">
-            Kontaktni udaje
+            Kontaktní údaje
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -128,7 +127,7 @@ export default function NastaveniPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  Mesto
+                  Město
                 </label>
                 <input
                   type="text"
@@ -139,7 +138,7 @@ export default function NastaveniPage() {
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  PSC
+                  PSČ
                 </label>
                 <input
                   type="text"
@@ -155,12 +154,12 @@ export default function NastaveniPage() {
         {/* Delivery */}
         <div className="rounded-xl border border-gold/10 bg-off-black p-6">
           <h2 className="mb-4 font-heading text-lg text-white">
-            Doruceni a objednavky
+            Doručení a objednávky
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="mb-1.5 block text-sm font-body text-white/60">
-                Oblasti doruceni
+                Oblasti doručení
               </label>
               <input
                 type="text"
@@ -171,7 +170,7 @@ export default function NastaveniPage() {
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-body text-white/60">
-                Minimalni objednavka (Kc)
+                Minimální objednávka (Kč)
               </label>
               <input
                 type="number"
@@ -182,7 +181,7 @@ export default function NastaveniPage() {
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-body text-white/60">
-                Doprava zdarma od (Kc)
+                Doprava zdarma od (Kč)
               </label>
               <input
                 type="number"
@@ -193,7 +192,7 @@ export default function NastaveniPage() {
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-body text-white/60">
-                Cena dopravy (Kc)
+                Cena dopravy (Kč)
               </label>
               <input
                 type="number"
@@ -208,7 +207,7 @@ export default function NastaveniPage() {
         {/* Social links */}
         <div className="rounded-xl border border-gold/10 bg-off-black p-6">
           <h2 className="mb-4 font-heading text-lg text-white">
-            Socialni site
+            Sociální sítě
           </h2>
           <div className="space-y-4">
             <div>

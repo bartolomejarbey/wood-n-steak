@@ -18,11 +18,9 @@ export default function AccountPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
 
-  // Login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  // Register form state
   const [regEmail, setRegEmail] = useState("");
   const [regFirstName, setRegFirstName] = useState("");
   const [regLastName, setRegLastName] = useState("");
@@ -31,11 +29,10 @@ export default function AccountPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulated login
     setUser({
       email: loginEmail,
       first_name: "Jan",
-      last_name: "Novak",
+      last_name: "Novák",
       phone: "+420 123 456 789",
     });
     setIsLoggedIn(true);
@@ -43,7 +40,6 @@ export default function AccountPage() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulated registration
     setUser({
       email: regEmail,
       first_name: regFirstName,
@@ -65,64 +61,57 @@ export default function AccountPage() {
     setRegPassword("");
   };
 
+  const inputClass = "w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white font-body text-sm placeholder:text-white/20 focus:border-gold/40 focus:outline-none transition-colors";
+
   if (isLoggedIn && user) {
     return (
       <section className="bg-off-black min-h-screen py-24 sm:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-3xl sm:text-4xl text-gold mb-2 text-center">
-            Muj ucet
-          </h1>
-          <div className="gold-divider" />
+          <div className="text-center mb-10">
+            <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Váš profil</span>
+            <h1 className="font-heading text-3xl sm:text-4xl text-cream mt-2">
+              Můj účet
+            </h1>
+          </div>
 
           {/* Profile Info */}
-          <div className="border border-gold/20 bg-black/40 p-8 mb-8">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-6">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 border border-gold/30 flex items-center justify-center">
-                <User className="w-7 h-7 text-gold" strokeWidth={1} />
+              <div className="w-12 h-12 bg-gold/[0.06] border border-gold/15 rounded-full flex items-center justify-center">
+                <User className="w-6 h-6 text-gold/70" strokeWidth={1} />
               </div>
               <div>
-                <h2 className="font-heading text-xl text-white">
+                <h2 className="font-heading text-lg text-white">
                   {user.first_name} {user.last_name}
                 </h2>
-                <p className="font-body text-white/50 text-sm">{user.email}</p>
+                <p className="font-body text-white/40 text-sm">{user.email}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="font-body text-gold/60 text-xs uppercase tracking-wider mb-1">
-                  Jmeno
-                </p>
-                <p className="font-body text-white/80 text-sm">
-                  {user.first_name} {user.last_name}
-                </p>
+                <p className="font-body text-white/30 text-xs uppercase tracking-wider mb-1">Jméno</p>
+                <p className="font-body text-white/70 text-sm">{user.first_name} {user.last_name}</p>
               </div>
               <div>
-                <p className="font-body text-gold/60 text-xs uppercase tracking-wider mb-1">
-                  Email
-                </p>
-                <p className="font-body text-white/80 text-sm">{user.email}</p>
+                <p className="font-body text-white/30 text-xs uppercase tracking-wider mb-1">E-mail</p>
+                <p className="font-body text-white/70 text-sm">{user.email}</p>
               </div>
               <div>
-                <p className="font-body text-gold/60 text-xs uppercase tracking-wider mb-1">
-                  Telefon
-                </p>
-                <p className="font-body text-white/80 text-sm">{user.phone}</p>
+                <p className="font-body text-white/30 text-xs uppercase tracking-wider mb-1">Telefon</p>
+                <p className="font-body text-white/70 text-sm">{user.phone}</p>
               </div>
             </div>
           </div>
 
           {/* Order History */}
-          <div className="border border-gold/20 bg-black/40 p-8 mb-8">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 mb-8">
             <div className="flex items-center gap-3 mb-6">
-              <Package className="w-5 h-5 text-gold" strokeWidth={1.5} />
-              <h2 className="font-heading text-xl text-white">
-                Historie objednavek
-              </h2>
+              <Package className="w-5 h-5 text-gold/60" strokeWidth={1.5} />
+              <h2 className="font-heading text-lg text-white">Historie objednávek</h2>
             </div>
-            <p className="font-body text-white/40 text-sm">
-              Zatim nemame zadne objednavky. Objednavky se zde zobrazi po
-              dokonceni prvniho nakupu.
+            <p className="font-body text-white/30 text-sm">
+              Zatím nemáte žádné objednávky. Objednávky se zde zobrazí po dokončení prvního nákupu.
             </p>
           </div>
 
@@ -130,10 +119,10 @@ export default function AccountPage() {
           <div className="text-center">
             <button
               onClick={handleLogout}
-              className="inline-flex items-center gap-2 px-8 py-3.5 border border-gold/30 text-gold font-body text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3 border border-white/[0.08] text-white/50 font-body text-sm tracking-wider uppercase rounded-full hover:border-gold/30 hover:text-gold transition-all duration-300"
             >
               <LogOut className="w-4 h-4" strokeWidth={1.5} />
-              Odhlasit se
+              Odhlásit se
             </button>
           </div>
         </div>
@@ -144,31 +133,33 @@ export default function AccountPage() {
   return (
     <section className="bg-off-black min-h-screen py-24 sm:py-32">
       <div className="max-w-md mx-auto px-4 sm:px-6">
-        <h1 className="font-heading text-3xl sm:text-4xl text-gold mb-2 text-center">
-          Muj ucet
-        </h1>
-        <div className="gold-divider" />
+        <div className="text-center mb-10">
+          <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Přihlášení</span>
+          <h1 className="font-heading text-3xl sm:text-4xl text-cream mt-2">
+            Můj účet
+          </h1>
+        </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gold/20 mb-8">
+        <div className="flex mb-8 bg-white/[0.02] rounded-lg p-1 border border-white/[0.06]">
           <button
             onClick={() => setTab("login")}
             className={cn(
-              "flex-1 py-3 font-body text-sm tracking-wider uppercase transition-colors",
+              "flex-1 py-2.5 font-body text-sm tracking-wider uppercase transition-all rounded-md",
               tab === "login"
-                ? "text-gold border-b-2 border-gold"
-                : "text-white/40 hover:text-white/60"
+                ? "text-gold bg-gold/[0.08]"
+                : "text-white/30 hover:text-white/50"
             )}
           >
-            Prihlaseni
+            Přihlášení
           </button>
           <button
             onClick={() => setTab("register")}
             className={cn(
-              "flex-1 py-3 font-body text-sm tracking-wider uppercase transition-colors",
+              "flex-1 py-2.5 font-body text-sm tracking-wider uppercase transition-all rounded-md",
               tab === "register"
-                ? "text-gold border-b-2 border-gold"
-                : "text-white/40 hover:text-white/60"
+                ? "text-gold bg-gold/[0.08]"
+                : "text-white/30 hover:text-white/50"
             )}
           >
             Registrace
@@ -179,36 +170,32 @@ export default function AccountPage() {
         {tab === "login" && (
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                Email
-              </label>
+              <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">E-mail</label>
               <input
                 type="email"
                 required
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="vas@email.cz"
-                className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                placeholder="váš@email.cz"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                Heslo
-              </label>
+              <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">Heslo</label>
               <input
                 type="password"
                 required
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
-                placeholder="Vase heslo"
-                className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                placeholder="Vaše heslo"
+                className={inputClass}
               />
             </div>
             <button
               type="submit"
-              className="w-full py-3.5 bg-gold text-black font-body text-sm font-semibold tracking-wider uppercase hover:bg-gold-light transition-colors"
+              className="w-full py-3.5 bg-gold text-black font-body text-sm font-medium tracking-wider uppercase rounded-full hover:bg-gold-light transition-colors"
             >
-              Prihlasit se
+              Přihlásit se
             </button>
           </form>
         )}
@@ -218,74 +205,64 @@ export default function AccountPage() {
           <form onSubmit={handleRegister} className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                  Jmeno
-                </label>
+                <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">Jméno</label>
                 <input
                   type="text"
                   required
                   value={regFirstName}
                   onChange={(e) => setRegFirstName(e.target.value)}
                   placeholder="Jan"
-                  className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                  className={inputClass}
                 />
               </div>
               <div>
-                <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                  Prijmeni
-                </label>
+                <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">Příjmení</label>
                 <input
                   type="text"
                   required
                   value={regLastName}
                   onChange={(e) => setRegLastName(e.target.value)}
-                  placeholder="Novak"
-                  className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                  placeholder="Novák"
+                  className={inputClass}
                 />
               </div>
             </div>
             <div>
-              <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                Email
-              </label>
+              <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">E-mail</label>
               <input
                 type="email"
                 required
                 value={regEmail}
                 onChange={(e) => setRegEmail(e.target.value)}
-                placeholder="vas@email.cz"
-                className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                placeholder="váš@email.cz"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                Telefon
-              </label>
+              <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">Telefon</label>
               <input
                 type="tel"
                 required
                 value={regPhone}
                 onChange={(e) => setRegPhone(e.target.value)}
                 placeholder="+420 123 456 789"
-                className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="font-body text-white/60 text-xs uppercase tracking-wider block mb-2">
-                Heslo
-              </label>
+              <label className="font-body text-white/40 text-xs uppercase tracking-wider block mb-2">Heslo</label>
               <input
                 type="password"
                 required
                 value={regPassword}
                 onChange={(e) => setRegPassword(e.target.value)}
                 placeholder="Zvolte heslo"
-                className="w-full px-4 py-3 bg-black/60 border border-gold/20 text-white font-body text-sm placeholder:text-white/20 focus:border-gold focus:outline-none transition-colors"
+                className={inputClass}
               />
             </div>
             <button
               type="submit"
-              className="w-full py-3.5 bg-gold text-black font-body text-sm font-semibold tracking-wider uppercase hover:bg-gold-light transition-colors"
+              className="w-full py-3.5 bg-gold text-black font-body text-sm font-medium tracking-wider uppercase rounded-full hover:bg-gold-light transition-colors"
             >
               Zaregistrovat se
             </button>

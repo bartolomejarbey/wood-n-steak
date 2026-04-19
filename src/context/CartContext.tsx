@@ -18,26 +18,19 @@ const CartContext = createContext<CartContextType | null>(null);
 const CART_KEY = "ws-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [loaded, setLoaded] = useState(false);
-
-  // Load from localStorage
-  useEffect(() => {
+  const [items, setItems] = useState<CartItem[]>(() => {
+    if (typeof window === "undefined") return [];
     try {
       const saved = localStorage.getItem(CART_KEY);
-      if (saved) {
-        setItems(JSON.parse(saved));
-      }
+      return saved ? JSON.parse(saved) : [];
     } catch {}
-    setLoaded(true);
-  }, []);
+    return [];
+  });
 
   // Save to localStorage
   useEffect(() => {
-    if (loaded) {
-      localStorage.setItem(CART_KEY, JSON.stringify(items));
-    }
-  }, [items, loaded]);
+    localStorage.setItem(CART_KEY, JSON.stringify(items));
+  }, [items]);
 
   const addItem = (product: Product, quantity: number) => {
     setItems((prev) => {

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     if (!merchantId || !secret) {
       console.warn("Comgate credentials not configured");
       return NextResponse.json(
-        { error: "Platebni brana neni nakonfigurovana", fallback: true },
+        { error: "Platební brána není nakonfigurovaná", fallback: true },
         { status: 503 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       merchant: merchantId,
       price: String(Math.round(amount * 100)), // in hellers
       curr: "CZK",
-      label: `Objednavka ${orderNumber}`,
+      label: `Objednávka ${orderNumber}`,
       refId: orderId,
       email: email,
       method: "ALL",
@@ -55,13 +55,13 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: result.message || "Chyba pri vytvareni platby" },
+      { error: result.message || "Chyba při vytváření platby" },
       { status: 400 }
     );
   } catch (error) {
     console.error("Comgate create-payment error:", error);
     return NextResponse.json(
-      { error: "Chyba pri komunikaci s platebni branou" },
+      { error: "Chyba při komunikaci s platební bránou" },
       { status: 500 }
     );
   }

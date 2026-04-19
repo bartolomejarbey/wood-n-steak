@@ -13,7 +13,7 @@ export async function generatePaymentQR(options: {
       amount: options.amount,
       account: account,
       variableSymbol: options.variableSymbol,
-      message: options.message || `Objednavka ${options.variableSymbol}`,
+      message: options.message || `Objednávka ${options.variableSymbol}`,
     });
 
     const dataUrl = await QRCode.toDataURL(spdString, {

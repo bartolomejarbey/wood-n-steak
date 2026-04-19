@@ -10,7 +10,7 @@ export function formatPrice(price: number): string {
     style: "decimal",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(price) + " Kc";
+  }).format(price) + " Kč";
 }
 
 export function generateOrderNumber(): string {

@@ -15,9 +15,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Wood & Steak | Steak jako z restaurace u vas doma",
+  title: "Wood & Steak | Steak jako z restaurace u vás doma",
   description:
-    "Premiove maso, domaci omacky a vybaveni pro pripravu dokonaleho steaku. E-shop steakhouse Wood & Steak z Vinohrad.",
+    "Prémiové maso, domácí omáčky a vybavení pro přípravu dokonalého steaku. E-shop steakhouse Wood & Steak z Vinohrad.",
 };
 
 export default function RootLayout({

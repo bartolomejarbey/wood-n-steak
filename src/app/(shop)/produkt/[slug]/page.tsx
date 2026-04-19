@@ -7,7 +7,6 @@ import { Minus, Plus } from "lucide-react";
 import {
   getProductBySlug,
   getProductsByCategory,
-  getCategoryBySlug,
   getCategories,
 } from "@/lib/data";
 import type { Product } from "@/lib/types";
@@ -18,8 +17,8 @@ import ProductCard from "@/components/shop/ProductCard";
 
 const stockLabels: Record<Product["stock_status"], string> = {
   in_stock: "Skladem",
-  on_order: "Na objednavku",
-  out_of_stock: "Vyprodano",
+  on_order: "Na objednávku",
+  out_of_stock: "Vyprodáno",
 };
 
 const stockColors: Record<Product["stock_status"], string> = {
@@ -58,9 +57,9 @@ export default function ProductDetailPage() {
           </h1>
           <Link
             href="/sortiment"
-            className="font-body text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-black transition-all duration-200 text-sm"
+            className="font-body text-gold border border-gold rounded-full px-6 py-2 hover:bg-gold hover:text-black transition-all duration-200 text-sm"
           >
-            Zpet na sortiment
+            Zpět na sortiment
           </Link>
         </div>
       </main>
@@ -78,7 +77,7 @@ export default function ProductDetailPage() {
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 pt-8 pb-4">
         <nav>
-          <ol className="flex items-center gap-2 font-heading text-sm italic text-cream/50">
+          <ol className="flex items-center gap-2 font-body text-xs text-white/35">
             <li>
               <Link
                 href="/sortiment"
@@ -110,12 +109,12 @@ export default function ProductDetailPage() {
       <section className="max-w-7xl mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Image gallery - 60% */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 rounded-2xl overflow-hidden">
             {product.image_url ? (
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-full aspect-square object-cover"
+                className="w-full aspect-square object-cover rounded-2xl"
               />
             ) : (
               <ImagePlaceholder type="product" />
@@ -126,7 +125,7 @@ export default function ProductDetailPage() {
           <div className="lg:col-span-2 flex flex-col">
             {/* Badge */}
             {product.badge && (
-              <span className="inline-block self-start bg-gold text-black text-xs font-body font-semibold px-3 py-1 tracking-wide uppercase mb-4">
+              <span className="inline-block self-start bg-gold text-black text-xs font-body font-semibold px-3 py-1 rounded-full tracking-wide uppercase mb-4">
                 {product.badge}
               </span>
             )}
@@ -176,14 +175,14 @@ export default function ProductDetailPage() {
                 {/* Quantity */}
                 <div className="flex items-center gap-4">
                   <span className="font-body text-cream/50 text-sm">
-                    Pocet:
+                    Počet:
                   </span>
-                  <div className="flex items-center border border-gold/30">
+                  <div className="flex items-center border border-white/[0.08] rounded-xl overflow-hidden">
                     <button
                       onClick={() =>
                         setQuantity((q) => Math.max(1, q - 1))
                       }
-                      className="w-10 h-10 flex items-center justify-center text-gold hover:bg-gold/10 transition-colors"
+                      className="w-10 h-10 flex items-center justify-center text-gold hover:bg-gold/10 transition-colors rounded-xl"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
@@ -192,7 +191,7 @@ export default function ProductDetailPage() {
                     </span>
                     <button
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="w-10 h-10 flex items-center justify-center text-gold hover:bg-gold/10 transition-colors"
+                      className="w-10 h-10 flex items-center justify-center text-gold hover:bg-gold/10 transition-colors rounded-xl"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -203,13 +202,13 @@ export default function ProductDetailPage() {
                 <button
                   onClick={handleAddToCart}
                   className={cn(
-                    "w-full py-3.5 font-body font-semibold text-sm tracking-wide uppercase transition-all duration-200",
+                    "w-full py-3.5 font-body font-semibold text-sm tracking-wide uppercase rounded-full transition-all duration-200",
                     added
                       ? "bg-green-700 text-cream border border-green-700"
                       : "bg-gold text-black border border-gold hover:bg-gold/90"
                   )}
                 >
-                  {added ? "Pridano do kosiku!" : "Do kosiku"}
+                  {added ? "Přidáno do košíku!" : "Do košíku"}
                 </button>
               </div>
             )}
@@ -218,9 +217,9 @@ export default function ProductDetailPage() {
               <div className="mt-auto">
                 <button
                   disabled
-                  className="w-full py-3.5 font-body font-semibold text-sm tracking-wide uppercase bg-transparent border border-cream/20 text-cream/30 cursor-not-allowed"
+                  className="w-full py-3.5 font-body font-semibold text-sm tracking-wide uppercase rounded-full bg-transparent border border-cream/20 text-cream/30 cursor-not-allowed"
                 >
-                  Vyprodano
+                  Vyprodáno
                 </button>
               </div>
             )}
@@ -231,9 +230,10 @@ export default function ProductDetailPage() {
       {/* Related products */}
       {relatedProducts.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 pb-20">
-          <div className="border-t border-gold/10 pt-12">
-            <h2 className="font-heading text-2xl md:text-3xl text-cream mb-8">
-              Mohlo by vas zajimat
+          <div className="border-t border-white/[0.06] pt-12">
+            <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Další produkty</span>
+            <h2 className="font-heading text-2xl md:text-3xl text-cream mt-1 mb-8">
+              Mohlo by vás zajímat
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((p) => (

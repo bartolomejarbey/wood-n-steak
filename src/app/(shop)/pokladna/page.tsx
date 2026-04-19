@@ -10,9 +10,9 @@ import ImagePlaceholder from "@/components/shop/ImagePlaceholder";
 const MIN_ORDER = 500;
 
 const inputClass =
-  "w-full px-4 py-3 bg-cream/10 border border-gold/30 text-white font-body text-sm placeholder:text-white/30 focus:border-gold focus:outline-none transition-colors";
+  "w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white font-body text-sm placeholder:text-white/20 focus:border-gold/40 focus:outline-none transition-colors";
 
-const labelClass = "block font-body text-white/60 text-xs uppercase tracking-wider mb-2";
+const labelClass = "block font-body text-white/40 text-xs uppercase tracking-wider mb-2";
 
 type PaymentMethod = "comgate" | "bank_transfer" | "cod";
 
@@ -73,17 +73,17 @@ export default function PokladnaPage() {
 
   if (items.length === 0) {
     return (
-      <section className="min-h-screen bg-forest py-24">
+      <section className="min-h-screen bg-off-black py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h1 className="font-heading text-3xl text-white mb-4">Pokladna</h1>
-          <p className="font-body text-white/50 mb-8">
-            Vas kosik je prazdny. Pred objednavkou nejprve pridejte produkty do kosiku.
+          <h1 className="font-heading text-3xl text-cream mb-4">Pokladna</h1>
+          <p className="font-body text-white/40 mb-8">
+            Váš košík je prázdný. Před objednávkou nejprve přidejte produkty do košíku.
           </p>
           <Link
             href="/sortiment"
-            className="inline-block px-8 py-3.5 bg-gold text-black font-body text-sm font-semibold tracking-wider uppercase hover:bg-gold-light transition-colors"
+            className="inline-block px-8 py-3.5 bg-gold text-black font-body text-sm font-medium tracking-wider uppercase rounded-full hover:bg-gold-light transition-colors"
           >
-            Prohlednout sortiment
+            Prohlédnout sortiment
           </Link>
         </div>
       </section>
@@ -91,19 +91,22 @@ export default function PokladnaPage() {
   }
 
   return (
-    <section className="min-h-screen bg-forest py-16 sm:py-24">
+    <section className="min-h-screen bg-off-black py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="font-heading text-3xl sm:text-4xl text-white mb-12">
-          Pokladna
-        </h1>
+        <div className="mb-10">
+          <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Objednávka</span>
+          <h1 className="font-heading text-3xl sm:text-4xl text-cream mt-1">
+            Pokladna
+          </h1>
+        </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-10 lg:gap-12">
           {/* Left column - form */}
           <div className="flex-1 space-y-10">
             {/* Contact info */}
             <div>
-              <h2 className="font-heading text-lg text-gold mb-6">
-                Kontaktni udaje
+              <h2 className="font-heading text-lg text-cream mb-6">
+                Kontaktní údaje
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
@@ -113,12 +116,12 @@ export default function PokladnaPage() {
                     required
                     value={form.email}
                     onChange={update("email")}
-                    placeholder="vas@email.cz"
+                    placeholder="váš@email.cz"
                     className={inputClass}
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Jmeno *</label>
+                  <label className={labelClass}>Jméno *</label>
                   <input
                     type="text"
                     required
@@ -129,13 +132,13 @@ export default function PokladnaPage() {
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Prijmeni *</label>
+                  <label className={labelClass}>Příjmení *</label>
                   <input
                     type="text"
                     required
                     value={form.last_name}
                     onChange={update("last_name")}
-                    placeholder="Novak"
+                    placeholder="Novák"
                     className={inputClass}
                   />
                 </div>
@@ -155,23 +158,23 @@ export default function PokladnaPage() {
 
             {/* Shipping address */}
             <div>
-              <h2 className="font-heading text-lg text-gold mb-6">
-                Dorucovaci adresa
+              <h2 className="font-heading text-lg text-cream mb-6">
+                Doručovací adresa
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
-                  <label className={labelClass}>Ulice a cislo popisne *</label>
+                  <label className={labelClass}>Ulice a číslo popisné *</label>
                   <input
                     type="text"
                     required
                     value={form.shipping_street}
                     onChange={update("shipping_street")}
-                    placeholder="Vinohradska 12"
+                    placeholder="Vinohradská 12"
                     className={inputClass}
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Mesto *</label>
+                  <label className={labelClass}>Město *</label>
                   <input
                     type="text"
                     required
@@ -182,7 +185,7 @@ export default function PokladnaPage() {
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>PSC *</label>
+                  <label className={labelClass}>PSČ *</label>
                   <input
                     type="text"
                     required
@@ -200,8 +203,8 @@ export default function PokladnaPage() {
               <label className="flex items-center gap-3 cursor-pointer group">
                 <div
                   className={cn(
-                    "w-5 h-5 border flex items-center justify-center transition-colors",
-                    isCompany ? "border-gold bg-gold" : "border-gold/30"
+                    "w-5 h-5 border rounded-md flex items-center justify-center transition-colors",
+                    isCompany ? "border-gold bg-gold" : "border-white/[0.08]"
                   )}
                   onClick={() => setIsCompany(!isCompany)}
                 >
@@ -222,7 +225,7 @@ export default function PokladnaPage() {
               {isCompany && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                   <div className="sm:col-span-2">
-                    <label className={labelClass}>Nazev firmy</label>
+                    <label className={labelClass}>Název firmy</label>
                     <input
                       type="text"
                       value={form.company_name}
@@ -232,7 +235,7 @@ export default function PokladnaPage() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>ICO</label>
+                    <label className={labelClass}>IČO</label>
                     <input
                       type="text"
                       value={form.ico}
@@ -242,7 +245,7 @@ export default function PokladnaPage() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>DIC</label>
+                    <label className={labelClass}>DIČ</label>
                     <input
                       type="text"
                       value={form.dic}
@@ -257,15 +260,15 @@ export default function PokladnaPage() {
 
             {/* Delivery */}
             <div>
-              <h2 className="font-heading text-lg text-gold mb-6">
-                Zpusob doruceni
+              <h2 className="font-heading text-lg text-cream mb-6">
+                Způsob doručení
               </h2>
-              <div className="border border-gold/30 bg-cream/5 p-4 flex items-center gap-4">
+              <div className="border border-white/[0.08] bg-white/[0.02] rounded-2xl p-4 flex items-center gap-4">
                 <div className="w-5 h-5 border-2 border-gold rounded-full flex items-center justify-center">
                   <div className="w-2.5 h-2.5 bg-gold rounded-full" />
                 </div>
                 <div>
-                  <p className="font-body text-white text-sm">Vlastni rozvoz</p>
+                  <p className="font-body text-white text-sm">Vlastní rozvoz</p>
                   <p className="font-body text-gold text-xs mt-0.5">ZDARMA</p>
                 </div>
               </div>
@@ -273,21 +276,21 @@ export default function PokladnaPage() {
 
             {/* Payment */}
             <div>
-              <h2 className="font-heading text-lg text-gold mb-6">
-                Zpusob platby
+              <h2 className="font-heading text-lg text-cream mb-6">
+                Způsob platby
               </h2>
               <div className="space-y-3">
                 {([
-                  { value: "comgate" as const, label: "Kartou online", desc: "Platba kartou pres Comgate" },
-                  { value: "bank_transfer" as const, label: "Bankovni prevod", desc: "Platba prevodem na ucet" },
-                  { value: "cod" as const, label: "Dobirka", desc: "Platba pri prevzeti" },
+                  { value: "comgate" as const, label: "Kartou online", desc: "Platba kartou přes Comgate" },
+                  { value: "bank_transfer" as const, label: "Bankovní převod", desc: "Platba převodem na účet" },
+                  { value: "cod" as const, label: "Dobírka", desc: "Platba při převzetí" },
                 ]).map((opt) => (
                   <label
                     key={opt.value}
                     className={cn(
-                      "flex items-center gap-4 border p-4 cursor-pointer transition-colors",
+                      "flex items-center gap-4 border rounded-2xl p-4 cursor-pointer transition-colors",
                       payment === opt.value
-                        ? "border-gold/50 bg-cream/5"
+                        ? "border-gold/50 bg-white/[0.02]"
                         : "border-white/10 hover:border-gold/20"
                     )}
                   >
@@ -315,14 +318,14 @@ export default function PokladnaPage() {
 
             {/* Note */}
             <div>
-              <h2 className="font-heading text-lg text-gold mb-6">
-                Poznamka k objednavce
+              <h2 className="font-heading text-lg text-cream mb-6">
+                Poznámka k objednávce
               </h2>
               <textarea
                 value={form.note}
                 onChange={update("note")}
                 rows={3}
-                placeholder="Napr. preferovany cas doruceni, poznamky ke zvonku..."
+                placeholder="Např. preferovaný čas doručení, poznámky ke zvonku..."
                 className={cn(inputClass, "resize-none")}
               />
             </div>
@@ -332,8 +335,8 @@ export default function PokladnaPage() {
               <label className="flex items-start gap-3 cursor-pointer group">
                 <div
                   className={cn(
-                    "w-5 h-5 border flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors",
-                    gdpr ? "border-gold bg-gold" : "border-gold/30"
+                    "w-5 h-5 border rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors",
+                    gdpr ? "border-gold bg-gold" : "border-white/[0.08]"
                   )}
                   onClick={() => setGdpr(!gdpr)}
                 >
@@ -347,11 +350,11 @@ export default function PokladnaPage() {
                   className="font-body text-white/60 text-sm leading-relaxed group-hover:text-white/80 transition-colors"
                   onClick={() => setGdpr(!gdpr)}
                 >
-                  Souhlasim s{" "}
+                  Souhlasím s{" "}
                   <Link href="/obchodni-podminky" className="text-gold underline underline-offset-2">
-                    obchodnimi podminkami
+                    obchodními podmínkami
                   </Link>{" "}
-                  a zpracovanim osobnich udaju. *
+                  a zpracováním osobních údajů. *
                 </span>
               </label>
             </div>
@@ -360,35 +363,35 @@ export default function PokladnaPage() {
             <div className="lg:hidden">
               {isUnderMin && (
                 <p className="font-body text-red-400 text-xs mb-4">
-                  Minimalni objednavka je {formatPrice(MIN_ORDER)}.
+                  Minimální objednávka je {formatPrice(MIN_ORDER)}.
                 </p>
               )}
               <button
                 type="submit"
                 disabled={!isValid || submitting}
                 className={cn(
-                  "w-full px-6 py-4 font-body text-sm font-semibold tracking-wider uppercase transition-all duration-300",
+                  "w-full px-6 py-4 font-body text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded-full",
                   isValid && !submitting
-                    ? "bg-gold text-black hover:bg-gold-light"
+                    ? "bg-gradient-to-r from-gold to-gold-light text-black hover:brightness-110"
                     : "bg-white/10 text-white/30 cursor-not-allowed"
                 )}
               >
-                {submitting ? "Odesilam..." : "Objednat"}
+                {submitting ? "Odesílám..." : "Objednat"}
               </button>
             </div>
           </div>
 
           {/* Right column - order summary */}
           <div className="lg:w-96 flex-shrink-0">
-            <div className="lg:sticky lg:top-28 bg-black/40 border border-gold/20 p-6">
+            <div className="lg:sticky lg:top-28 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
               <h2 className="font-heading text-lg text-white mb-6">
-                Vase objednavka
+                Vaše objednávka
               </h2>
 
               <div className="space-y-4 mb-6">
                 {items.map((item) => (
                   <div key={item.product.id} className="flex gap-3">
-                    <div className="w-14 h-14 flex-shrink-0">
+                    <div className="w-14 h-14 flex-shrink-0 rounded-xl overflow-hidden">
                       <ImagePlaceholder
                         type="square"
                         className="w-full h-full !aspect-auto"
@@ -410,18 +413,18 @@ export default function PokladnaPage() {
                 ))}
               </div>
 
-              <div className="h-px bg-gold/20 mb-4" />
+              <div className="h-px bg-white/[0.06] mb-4" />
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between font-body text-sm">
-                  <span className="text-white/60">Mezisouce</span>
+                  <span className="text-white/60">Mezisoučet</span>
                   <span className="text-white">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between font-body text-sm">
                   <span className="text-white/60">Doprava</span>
                   <span className="text-gold">ZDARMA</span>
                 </div>
-                <div className="h-px bg-gold/20" />
+                <div className="h-px bg-white/[0.06]" />
                 <div className="flex justify-between items-baseline">
                   <span className="font-body text-white/60 text-sm">Celkem</span>
                   <span className="font-heading text-2xl text-gold">
@@ -434,20 +437,20 @@ export default function PokladnaPage() {
               <div className="hidden lg:block">
                 {isUnderMin && (
                   <p className="font-body text-red-400 text-xs mb-4">
-                    Minimalni objednavka je {formatPrice(MIN_ORDER)}.
+                    Minimální objednávka je {formatPrice(MIN_ORDER)}.
                   </p>
                 )}
                 <button
                   type="submit"
                   disabled={!isValid || submitting}
                   className={cn(
-                    "w-full px-6 py-4 font-body text-sm font-semibold tracking-wider uppercase transition-all duration-300",
+                    "w-full px-6 py-4 font-body text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded-full",
                     isValid && !submitting
-                      ? "bg-gold text-black hover:bg-gold-light"
+                      ? "bg-gradient-to-r from-gold to-gold-light text-black hover:brightness-110"
                       : "bg-white/10 text-white/30 cursor-not-allowed"
                   )}
                 >
-                  {submitting ? "Odesilam..." : "Objednat"}
+                  {submitting ? "Odesílám..." : "Objednat"}
                 </button>
               </div>
 
@@ -455,7 +458,7 @@ export default function PokladnaPage() {
                 href="/kosik"
                 className="block text-center mt-4 font-body text-sm text-white/50 hover:text-gold transition-colors"
               >
-                Zpet do kosiku
+                Zpět do košíku
               </Link>
             </div>
           </div>

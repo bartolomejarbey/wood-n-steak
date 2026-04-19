@@ -7,30 +7,30 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative bg-off-black py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="relative rounded-2xl overflow-hidden">
               <ImagePlaceholder
                 type="restaurant"
                 text="Wood & Steak Restaurace"
               />
-              <div className="absolute inset-0 border border-gold/20" />
             </div>
 
             <div>
-              <h1 className="font-heading text-4xl sm:text-5xl text-gold mb-6">
+              <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Náš příběh</span>
+              <h1 className="font-heading text-4xl sm:text-5xl text-cream mt-2 mb-6">
                 O restauraci
               </h1>
-              <div className="w-16 h-px bg-gold mb-8" />
-              <p className="font-body text-white/60 text-base sm:text-lg leading-relaxed mb-6">
-                Wood & Steak je premiova steakhouse v srdci Vinohrad, nedaleko
-                Namesti Miru. Nase restaurace nabizi jedinecny gastronomicky
-                zazitek, kde se snoubi tradice s modernimi technikami pripravy
+              <div className="w-10 h-px bg-gold/40 mb-8" />
+              <p className="font-body text-white/50 text-base sm:text-lg leading-relaxed mb-5">
+                Wood & Steak je prémiová steakhouse v srdci Vinohrad, nedaleko
+                Náměstí Míru. Naše restaurace nabízí jedinečný gastronomický
+                zážitek, kde se snoubí tradice s moderními technikami přípravy
                 masa.
               </p>
-              <p className="font-body text-white/60 text-base sm:text-lg leading-relaxed">
-                Specializujeme se na peclive vybirane kusy masa, ktere
-                pripravujeme metodami dry-aging a sous-vide. Kazdy steak je u
-                nas umeni.
+              <p className="font-body text-white/50 text-base sm:text-lg leading-relaxed">
+                Specializujeme se na pečlivě vybírané kusy masa, které
+                připravujeme metodami dry-aging a sous-vide. Každý steak je u
+                nás umění.
               </p>
             </div>
           </div>
@@ -40,45 +40,47 @@ export default function AboutPage() {
       {/* Premium Concept - Cream Section */}
       <section className="bg-cream py-24 sm:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl sm:text-4xl text-black mb-6">
-            Premiovy koncept
+          <span className="font-body text-gold-dark/60 text-xs tracking-[0.3em] uppercase">Filozofie</span>
+          <h2 className="font-heading text-3xl sm:text-4xl text-black mt-2 mb-6">
+            Prémiový koncept
           </h2>
-          <div className="w-16 h-px bg-gold mx-auto mb-8" />
-          <p className="font-body text-black/60 text-base sm:text-lg leading-relaxed mb-6">
-            Nase filozofie stoji na jednoduchosti a kvalite. Vybirame pouze ty
-            nejlepsi suroviny od provereny dodavatelu a kazdy produkt
-            pripravujeme s maximalni peci. Od stolu v restauraci az po vasi
-            kuchyn &mdash; kvalita zustava stejna.
+          <div className="w-10 h-px bg-gold/50 mx-auto mb-8" />
+          <p className="font-body text-black/55 text-base sm:text-lg leading-relaxed mb-5">
+            Naše filozofie stojí na jednoduchosti a kvalitě. Vybíráme pouze ty
+            nejlepší suroviny od prověřených dodavatelů a každý produkt
+            připravujeme s maximální péčí. Od stolu v restauraci až po Vaši
+            kuchyň — kvalita zůstává stejná.
           </p>
-          <p className="font-body text-black/60 text-base sm:text-lg leading-relaxed mb-10">
-            Prostrednictvim naseho e-shopu prinasime steakovy zazitek primo k
-            vam domu. Najdete zde presne to, co podavame v restauraci &mdash;
-            premiove maso, domaci omacky, koreni a profesionalni vybaveni pro
-            grilovani.
+          <p className="font-body text-black/55 text-base sm:text-lg leading-relaxed mb-10">
+            Prostřednictvím našeho e-shopu přinášíme steakový zážitek přímo k
+            Vám domů. Najdete zde přesně to, co podáváme v restauraci —
+            prémiové maso, domácí omáčky, koření a profesionální vybavení pro
+            grilování.
           </p>
           <a
             href="https://www.woodandsteak.cz/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 border border-gold text-gold-dark font-body text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all duration-300"
+            className="inline-flex items-center gap-2 text-gold-dark font-body text-sm tracking-wide hover:text-gold transition-colors"
           >
-            Navstivit web restaurace
+            Navštívit web restaurace
             <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
           </a>
         </div>
       </section>
 
       {/* Location - Dark Section */}
-      <section className="bg-off-black py-24 sm:py-32">
+      <section className="bg-forest py-24 sm:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl sm:text-4xl text-white mb-6">
-            Najdete nas ve Vinohradech
+          <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Lokace</span>
+          <h2 className="font-heading text-3xl sm:text-4xl text-white mt-2 mb-6">
+            Najdete nás ve Vinohradech
           </h2>
-          <div className="gold-divider" />
-          <p className="font-body text-white/50 text-base sm:text-lg leading-relaxed">
-            Nase restaurace se nachazi v klidne casti Vinohrad, jen par minut
-            chuze od Namesti Miru. Prijdte nas navstivit a ochutnejte nase
-            steaky na miste, nebo si objednejte primo z naseho e-shopu.
+          <div className="w-12 h-px bg-gold/30 mx-auto mb-8" />
+          <p className="font-body text-white/45 text-base sm:text-lg leading-relaxed">
+            Naše restaurace se nachází v klidné části Vinohrad, jen pár minut
+            chůze od Náměstí Míru. Přijďte nás navštívit a ochutnejte naše
+            steaky na místě, nebo si objednejte přímo z našeho e-shopu.
           </p>
         </div>
       </section>

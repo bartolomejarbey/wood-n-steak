@@ -24,7 +24,7 @@ export default function NewsletterPage() {
         <div>
           <h1 className="font-heading text-2xl text-white">Newsletter</h1>
           <p className="mt-1 text-sm text-white/50 font-body">
-            {activeCount} aktivnich z {subscribers.length} odberatelu
+            {activeCount} aktivních z {subscribers.length} odběratelů
           </p>
         </div>
         <button className="inline-flex items-center gap-2 rounded-lg border border-gold/10 px-4 py-2.5 text-sm font-body text-white/60 transition-colors hover:border-gold/30 hover:text-white">
@@ -44,7 +44,7 @@ export default function NewsletterPage() {
                 Stav
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Datum prihlaseni
+                Datum přihlášení
               </th>
             </tr>
           </thead>
@@ -66,7 +66,7 @@ export default function NewsletterPage() {
                         : "bg-red-400/10 text-red-400"
                     )}
                   >
-                    {sub.active ? "Aktivni" : "Odhlaseny"}
+                    {sub.active ? "Aktivní" : "Odhlášený"}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm font-body text-white/50">

@@ -16,12 +16,12 @@ export default function KategoriePage() {
         <div>
           <h1 className="font-heading text-2xl text-white">Kategorie</h1>
           <p className="mt-1 text-sm text-white/50 font-body">
-            Sprava kategorii produktu
+            Správa kategorií produktů
           </p>
         </div>
         <button className="inline-flex items-center gap-2 rounded-lg bg-gold px-4 py-2.5 text-sm font-body font-medium text-black transition-colors hover:bg-gold-light">
           <Plus size={16} />
-          Pridat kategorii
+          Přidat kategorii
         </button>
       </div>
 
@@ -31,13 +31,13 @@ export default function KategoriePage() {
             <tr className="border-b border-gold/10 text-left">
               <th className="w-10 px-4 py-3" />
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Nazev
+                Název
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
                 Slug
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Produktu
+                Produktů
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
                 Stav
@@ -77,7 +77,7 @@ export default function KategoriePage() {
                         : "bg-red-400/10 text-red-400"
                     )}
                   >
-                    {category.is_active ? "Aktivni" : "Neaktivni"}
+                    {category.is_active ? "Aktivní" : "Neaktivní"}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">

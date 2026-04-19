@@ -16,8 +16,8 @@ function getCategoryName(categoryId: string): string {
 
 const stockLabels: Record<string, { label: string; color: string }> = {
   in_stock: { label: "Skladem", color: "text-green-400" },
-  on_order: { label: "Na objednavku", color: "text-yellow-400" },
-  out_of_stock: { label: "Vyprodano", color: "text-red-400" },
+  on_order: { label: "Na objednávku", color: "text-yellow-400" },
+  out_of_stock: { label: "Vyprodáno", color: "text-red-400" },
 };
 
 export default function ProduktyPage() {
@@ -37,7 +37,7 @@ export default function ProduktyPage() {
         <div>
           <h1 className="font-heading text-2xl text-white">Produkty</h1>
           <p className="mt-1 text-sm text-white/50 font-body">
-            Sprava produktu v nabidce
+            Správa produktů v nabídce
           </p>
         </div>
         <Link
@@ -45,7 +45,7 @@ export default function ProduktyPage() {
           className="inline-flex items-center gap-2 rounded-lg bg-gold px-4 py-2.5 text-sm font-body font-medium text-black transition-colors hover:bg-gold-light"
         >
           <Plus size={16} />
-          Pridat produkt
+          Přidat produkt
         </Link>
       </div>
 
@@ -69,7 +69,7 @@ export default function ProduktyPage() {
           onChange={(e) => setCategoryFilter(e.target.value)}
           className="rounded-lg border border-gold/10 bg-off-black px-4 py-2.5 text-sm font-body text-white focus:border-gold focus:ring-1 focus:ring-gold"
         >
-          <option value="">Vsechny kategorie</option>
+          <option value="">Všechny kategorie</option>
           {allCategories.map((cat) => (
             <option key={cat.id} value={cat.id}>
               {cat.name}
@@ -84,10 +84,10 @@ export default function ProduktyPage() {
           <thead>
             <tr className="border-b border-gold/10 text-left">
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Obrazek
+                Obrázek
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Nazev
+                Název
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
                 Kategorie
@@ -150,7 +150,7 @@ export default function ProduktyPage() {
                           : "bg-red-400/10 text-red-400"
                       )}
                     >
-                      {product.is_active ? "Aktivni" : "Neaktivni"}
+                      {product.is_active ? "Aktivní" : "Neaktivní"}
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
@@ -173,7 +173,7 @@ export default function ProduktyPage() {
         </table>
         {filtered.length === 0 && (
           <div className="px-6 py-12 text-center text-sm text-white/40 font-body">
-            Zadne produkty neodpovidaji vyhledavani.
+            Žádné produkty neodpovídají vyhledávání.
           </div>
         )}
       </div>

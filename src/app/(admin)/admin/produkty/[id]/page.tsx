@@ -12,10 +12,10 @@ export default function ProductEditPage() {
   const [name, setName] = useState("Rib Eye Black Angus dry-aged");
   const [slug, setSlug] = useState("rib-eye-black-angus-dry-aged");
   const [description, setDescription] = useState(
-    "Skvele mramorovany Rib Eye z Black Angus, zrajici 28 dni v nasi zracim boxu."
+    "Skvěle mramorovaný Rib Eye z Black Angus, zrající 28 dní v našem zracím boxu."
   );
   const [shortDescription, setShortDescription] = useState(
-    "Dry-aged 28 dni, intenzivni chut"
+    "Dry-aged 28 dní, intenzivní chuť"
   );
   const [categoryId, setCategoryId] = useState(
     "a1000000-0000-0000-0000-000000000001"
@@ -51,12 +51,12 @@ export default function ProductEditPage() {
           {/* Basic info */}
           <div className="rounded-xl border border-gold/10 bg-off-black p-6">
             <h2 className="mb-4 font-heading text-lg text-white">
-              Zakladni udaje
+              Základní údaje
             </h2>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  Nazev produktu
+                  Název produktu
                 </label>
                 <input
                   type="text"
@@ -78,7 +78,7 @@ export default function ProductEditPage() {
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  Kratky popis
+                  Krátký popis
                 </label>
                 <input
                   type="text"
@@ -109,7 +109,7 @@ export default function ProductEditPage() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  Cena (Kc)
+                  Cena (Kč)
                 </label>
                 <input
                   type="number"
@@ -147,12 +147,12 @@ export default function ProductEditPage() {
 
           {/* Image upload */}
           <div className="rounded-xl border border-gold/10 bg-off-black p-6">
-            <h2 className="mb-4 font-heading text-lg text-white">Obrazky</h2>
+            <h2 className="mb-4 font-heading text-lg text-white">Obrázky</h2>
             <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-gold/20 bg-black/50 px-6 py-12">
               <div className="text-center">
                 <Upload size={32} className="mx-auto text-gold/40" />
                 <p className="mt-2 text-sm text-white/50 font-body">
-                  Pretahnete obrazky sem nebo kliknete pro vyber
+                  Přetáhněte obrázky sem nebo klikněte pro výběr
                 </p>
                 <p className="mt-1 text-xs text-white/30 font-body">
                   PNG, JPG, WebP do 5 MB
@@ -194,13 +194,13 @@ export default function ProductEditPage() {
                   className="w-full rounded-lg border border-gold/10 bg-black px-4 py-2.5 text-sm font-body text-white"
                 >
                   <option value="in_stock">Skladem</option>
-                  <option value="on_order">Na objednavku</option>
-                  <option value="out_of_stock">Vyprodano</option>
+                  <option value="on_order">Na objednávku</option>
+                  <option value="out_of_stock">Vyprodáno</option>
                 </select>
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-body text-white/60">
-                  Stitek (badge)
+                  Štítek (badge)
                 </label>
                 <input
                   type="text"
@@ -211,7 +211,7 @@ export default function ProductEditPage() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-body text-white/60">
-                  Aktivni
+                  Aktivní
                 </span>
                 <button
                   onClick={() => setIsActive(!isActive)}
@@ -230,7 +230,7 @@ export default function ProductEditPage() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-body text-white/60">
-                  Doporuceny
+                  Doporučený
                 </span>
                 <button
                   onClick={() => setIsFeatured(!isFeatured)}
@@ -254,14 +254,14 @@ export default function ProductEditPage() {
           <div className="space-y-3">
             <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-gold px-4 py-2.5 text-sm font-body font-medium text-black transition-colors hover:bg-gold-light">
               <Save size={16} />
-              Ulozit produkt
+              Uložit produkt
             </button>
             <Link
               href="/admin/produkty"
               className="flex w-full items-center justify-center gap-2 rounded-lg border border-gold/10 px-4 py-2.5 text-sm font-body text-white/60 transition-colors hover:border-gold/30 hover:text-white"
             >
               <X size={16} />
-              Zrusit
+              Zrušit
             </Link>
           </div>
         </div>

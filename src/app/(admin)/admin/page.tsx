@@ -4,69 +4,69 @@ import { ShoppingCart, DollarSign, Package, Users } from "lucide-react";
 
 const stats = [
   {
-    label: "Celkem objednavek",
+    label: "Celkem objednávek",
     value: "156",
     icon: ShoppingCart,
-    change: "+12 tento mesic",
+    change: "+12 tento měsíc",
   },
   {
-    label: "Celkove trzby",
+    label: "Celkové tržby",
     value: formatPrice(487650),
     icon: DollarSign,
-    change: "+8.2 % oproti minulemu mesici",
+    change: "+8.2 % oproti minulému měsíci",
   },
   {
-    label: "Produktu v nabidce",
+    label: "Produktů v nabídce",
     value: "21",
     icon: Package,
-    change: "3 neaktivni",
+    change: "3 neaktivní",
   },
   {
-    label: "Registrovanych zakazniku",
+    label: "Registrovaných zákazníků",
     value: "89",
     icon: Users,
-    change: "+5 tento mesic",
+    change: "+5 tento měsíc",
   },
 ];
 
 const recentOrders = [
   {
     number: "WS-20260412",
-    customer: "Jan Novak",
+    customer: "Jan Novák",
     total: 4580,
-    status: "Doruceno",
+    status: "Doručeno",
     statusColor: "text-green-400",
     date: "12. 4. 2026",
   },
   {
     number: "WS-20260411",
-    customer: "Eva Svobodova",
+    customer: "Eva Svobodová",
     total: 2890,
-    status: "Odeslano",
+    status: "Odesláno",
     statusColor: "text-blue-400",
     date: "11. 4. 2026",
   },
   {
     number: "WS-20260410",
-    customer: "Petr Dvorak",
+    customer: "Petr Dvořák",
     total: 6120,
-    status: "Pripravuje se",
+    status: "Připravuje se",
     statusColor: "text-yellow-400",
     date: "10. 4. 2026",
   },
   {
     number: "WS-20260409",
-    customer: "Marie Kralova",
+    customer: "Marie Králová",
     total: 1490,
-    status: "Nova",
+    status: "Nová",
     statusColor: "text-gold",
     date: "9. 4. 2026",
   },
   {
     number: "WS-20260408",
-    customer: "Tomas Horak",
+    customer: "Tomáš Horák",
     total: 3670,
-    status: "Doruceno",
+    status: "Doručeno",
     statusColor: "text-green-400",
     date: "8. 4. 2026",
   },
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
       <div>
         <h1 className="font-heading text-2xl text-white">Dashboard</h1>
         <p className="mt-1 text-sm text-white/50 font-body">
-          Prehled vasho obchodu Wood & Steak
+          Přehled vašeho obchodu Wood & Steak
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
       <div className="rounded-xl border border-gold/10 bg-off-black">
         <div className="border-b border-gold/10 px-6 py-4">
           <h2 className="font-heading text-lg text-white">
-            Posledni objednavky
+            Poslední objednávky
           </h2>
         </div>
         <div className="overflow-x-auto">
@@ -120,13 +120,13 @@ export default function AdminDashboard() {
             <thead>
               <tr className="border-b border-gold/10 text-left">
                 <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                  Cislo
+                  Číslo
                 </th>
                 <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                  Zakaznik
+                  Zákazník
                 </th>
                 <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                  Castka
+                  Částka
                 </th>
                 <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
                   Stav

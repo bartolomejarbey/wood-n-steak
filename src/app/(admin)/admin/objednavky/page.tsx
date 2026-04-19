@@ -2,38 +2,38 @@ import { cn, formatPrice } from "@/lib/utils";
 
 const paymentStatuses: Record<string, { label: string; color: string }> = {
   paid: { label: "Zaplaceno", color: "bg-green-400/10 text-green-400" },
-  pending: { label: "Ceka na platbu", color: "bg-yellow-400/10 text-yellow-400" },
+  pending: { label: "Čeká na platbu", color: "bg-yellow-400/10 text-yellow-400" },
   failed: { label: "Selhala", color: "bg-red-400/10 text-red-400" },
   refunded: { label: "Vraceno", color: "bg-blue-400/10 text-blue-400" },
 };
 
 const orderStatuses: Record<string, { label: string; color: string }> = {
-  new: { label: "Nova", color: "bg-gold/10 text-gold" },
-  confirmed: { label: "Potvrzena", color: "bg-blue-400/10 text-blue-400" },
-  preparing: { label: "Pripravuje se", color: "bg-yellow-400/10 text-yellow-400" },
-  shipped: { label: "Odeslano", color: "bg-purple-400/10 text-purple-400" },
-  delivered: { label: "Doruceno", color: "bg-green-400/10 text-green-400" },
-  cancelled: { label: "Zruseno", color: "bg-red-400/10 text-red-400" },
+  new: { label: "Nová", color: "bg-gold/10 text-gold" },
+  confirmed: { label: "Potvrzená", color: "bg-blue-400/10 text-blue-400" },
+  preparing: { label: "Připravuje se", color: "bg-yellow-400/10 text-yellow-400" },
+  shipped: { label: "Odesláno", color: "bg-purple-400/10 text-purple-400" },
+  delivered: { label: "Doručeno", color: "bg-green-400/10 text-green-400" },
+  cancelled: { label: "Zrušeno", color: "bg-red-400/10 text-red-400" },
 };
 
 const orders = [
-  { number: "WS-20260412", customer: "Jan Novak", email: "jan@novak.cz", total: 4580, payment: "paid", status: "delivered", date: "12. 4. 2026" },
-  { number: "WS-20260411", customer: "Eva Svobodova", email: "eva@email.cz", total: 2890, payment: "paid", status: "shipped", date: "11. 4. 2026" },
-  { number: "WS-20260410", customer: "Petr Dvorak", email: "petr.dvorak@email.cz", total: 6120, payment: "paid", status: "preparing", date: "10. 4. 2026" },
-  { number: "WS-20260409", customer: "Marie Kralova", email: "kralova@firma.cz", total: 1490, payment: "pending", status: "new", date: "9. 4. 2026" },
-  { number: "WS-20260408", customer: "Tomas Horak", email: "t.horak@gmail.com", total: 3670, payment: "paid", status: "delivered", date: "8. 4. 2026" },
-  { number: "WS-20260407", customer: "Lucie Nemcova", email: "lucie.n@email.cz", total: 5230, payment: "paid", status: "delivered", date: "7. 4. 2026" },
-  { number: "WS-20260406", customer: "Jakub Cerny", email: "jakub@cerny.cz", total: 890, payment: "failed", status: "cancelled", date: "6. 4. 2026" },
-  { number: "WS-20260405", customer: "Hana Vesela", email: "hana.v@email.cz", total: 2340, payment: "paid", status: "confirmed", date: "5. 4. 2026" },
+  { number: "WS-20260412", customer: "Jan Novák", email: "jan@novak.cz", total: 4580, payment: "paid", status: "delivered", date: "12. 4. 2026" },
+  { number: "WS-20260411", customer: "Eva Svobodová", email: "eva@email.cz", total: 2890, payment: "paid", status: "shipped", date: "11. 4. 2026" },
+  { number: "WS-20260410", customer: "Petr Dvořák", email: "petr.dvorak@email.cz", total: 6120, payment: "paid", status: "preparing", date: "10. 4. 2026" },
+  { number: "WS-20260409", customer: "Marie Králová", email: "kralova@firma.cz", total: 1490, payment: "pending", status: "new", date: "9. 4. 2026" },
+  { number: "WS-20260408", customer: "Tomáš Horák", email: "t.horak@gmail.com", total: 3670, payment: "paid", status: "delivered", date: "8. 4. 2026" },
+  { number: "WS-20260407", customer: "Lucie Němcová", email: "lucie.n@email.cz", total: 5230, payment: "paid", status: "delivered", date: "7. 4. 2026" },
+  { number: "WS-20260406", customer: "Jakub Černý", email: "jakub@cerny.cz", total: 890, payment: "failed", status: "cancelled", date: "6. 4. 2026" },
+  { number: "WS-20260405", customer: "Hana Veselá", email: "hana.v@email.cz", total: 2340, payment: "paid", status: "confirmed", date: "5. 4. 2026" },
 ];
 
 export default function ObjednavkyPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-heading text-2xl text-white">Objednavky</h1>
+        <h1 className="font-heading text-2xl text-white">Objednávky</h1>
         <p className="mt-1 text-sm text-white/50 font-body">
-          Prehled a sprava objednavek
+          Přehled a správa objednávek
         </p>
       </div>
 
@@ -42,13 +42,13 @@ export default function ObjednavkyPage() {
           <thead>
             <tr className="border-b border-gold/10 text-left">
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Cislo
+                Číslo
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Zakaznik
+                Zákazník
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
-                Castka
+                Částka
               </th>
               <th className="px-6 py-3 text-xs font-body font-medium uppercase tracking-wider text-white/40">
                 Platba

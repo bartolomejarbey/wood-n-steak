@@ -4,10 +4,10 @@
   --color-gold: #A48742;
   --color-gold-light: #C4A865;
   --color-gold-dark: #7A6530;
-  --color-forest: #00221E;
-  --color-forest-light: #003A33;
+  --color-forest: #1A120B;
+  --color-forest-light: #2A1F14;
   --color-cream: #F5F1E8;
-  --color-off-black: #1A1A1A;
+  --color-off-black: #111111;
   --color-off-white: #FAFAFA;
 
   --font-heading: var(--font-playfair);
@@ -25,18 +25,27 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), Georgia, serif;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #A48742;
-  border-radius: 4px;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4A865;
 }
 
 /* Selection */
@@ -48,9 +57,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Gold divider utility */
 .gold-divider {
   width: 80px;
-  height: 1px;
-  background: #A48742;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #A48742, transparent);
   margin: 1.5rem auto;
+  border-radius: 99px;
 }
 
 /* Fade in animation */
@@ -69,9 +79,55 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeInUp 0.7s ease-out forwards;
 }
 
-/* Input styles */
+/* Subtle shimmer for premium feel */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #A48742 0%,
+    #C4A865 25%,
+    #A48742 50%,
+    #C4A865 75%,
+    #A48742 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Input styles — rounded */
+input, textarea, select {
+  border-radius: 12px;
+}
+
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #A48742;
-  box-shadow: 0 0 0 1px #A48742;
+  box-shadow: 0 0 0 1px rgba(164, 135, 66, 0.3), 0 0 20px rgba(164, 135, 66, 0.05);
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Section gradient overlays */
+.gradient-gold-subtle {
+  background: radial-gradient(ellipse at center, rgba(164, 135, 66, 0.06) 0%, transparent 70%);
+}
+
+.gradient-gold-top {
+  background: radial-gradient(ellipse at top, rgba(164, 135, 66, 0.08) 0%, transparent 60%);
+}
+
+.gradient-gold-bottom {
+  background: radial-gradient(ellipse at bottom, rgba(164, 135, 66, 0.08) 0%, transparent 60%);
 }
