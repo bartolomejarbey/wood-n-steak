@@ -10,7 +10,7 @@ const ROUTES_FILE = process.argv[3];
 const DEFAULT_ROUTES = [
   "/",
   "/sortiment",
-  "/produkt/rib-eye-black-angus",
+  "/produkt/rib-eye-black-angus-dry-aged",
   "/kosik",
   "/pokladna",
   "/ucet",

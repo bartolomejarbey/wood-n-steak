@@ -4,82 +4,102 @@
   --color-gold: #A48742;
   --color-gold-light: #C4A865;
   --color-gold-dark: #7A6530;
-  --color-forest: #1A120B;
-  --color-forest-light: #2A1F14;
+  --color-forest: #00221E;
+  --color-forest-deep: #001814;
+  --color-forest-light: #0A2E29;
   --color-cream: #F5F1E8;
-  --color-off-black: #111111;
+  --color-off-black: #1A1A1A;
   --color-off-white: #FAFAFA;
 
   --font-heading: var(--font-playfair);
   --font-body: var(--font-dm-sans);
 }
 
-/* Base styles */
+/* Base */
+html { scroll-behavior: smooth; }
+
 body {
   background: #000000;
   color: #FFFFFF;
   font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), Georgia, serif;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+  font-feature-settings: "ss01", "ss02";
 }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #A48742;
-  border-radius: 99px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #C4A865;
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #A48742; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #C4A865; }
 
 /* Selection */
-::selection {
-  background: rgba(164, 135, 66, 0.3);
-  color: #FFFFFF;
+::selection { background: rgba(164, 135, 66, 0.35); color: #FFFFFF; }
+
+/* Focus ring — gold outline for a11y */
+:focus-visible {
+  outline: 2px solid #A48742;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 /* Gold divider utility */
 .gold-divider {
   width: 80px;
-  height: 2px;
+  height: 1px;
   background: linear-gradient(90deg, transparent, #A48742, transparent);
   margin: 1.5rem auto;
-  border-radius: 99px;
 }
 
-/* Fade in animation */
+.gold-divider-left {
+  width: 60px;
+  height: 1px;
+  background: #A48742;
+  margin: 1.25rem 0;
+}
+
+/* Thin full-width gold line */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(164, 135, 66, 0.6), transparent);
+}
+
+/* Typography helpers */
+.overline {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #A48742;
+}
+
+.overline-cream {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F5F1E8;
+}
+
+/* Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.7s ease-out forwards;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+.animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
 
-/* Subtle shimmer for premium feel */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -101,33 +121,122 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
-/* Input styles — rounded */
+/* Skeleton loader — dark with gold shimmer */
+@keyframes skeletonShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 1) 0%,
+    rgba(164, 135, 66, 0.08) 50%,
+    rgba(26, 26, 26, 1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-cream {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 241, 232, 0.6) 0%,
+    rgba(164, 135, 66, 0.15) 50%,
+    rgba(245, 241, 232, 0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Inputs */
 input, textarea, select {
-  border-radius: 12px;
+  border-radius: 10px;
+  font-family: inherit;
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #A48742;
-  box-shadow: 0 0 0 1px rgba(164, 135, 66, 0.3), 0 0 20px rgba(164, 135, 66, 0.05);
+  box-shadow: 0 0 0 3px rgba(164, 135, 66, 0.15);
 }
 
-/* Glass effect utility */
+/* Glass */
 .glass {
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
-/* Section gradient overlays */
-.gradient-gold-subtle {
-  background: radial-gradient(ellipse at center, rgba(164, 135, 66, 0.06) 0%, transparent 70%);
+.glass-light {
+  background: rgba(26, 26, 26, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.gradient-gold-top {
-  background: radial-gradient(ellipse at top, rgba(164, 135, 66, 0.08) 0%, transparent 60%);
+/* Gradient overlays */
+.gradient-gold-subtle { background: radial-gradient(ellipse at center, rgba(164, 135, 66, 0.06) 0%, transparent 70%); }
+.gradient-gold-top { background: radial-gradient(ellipse at top, rgba(164, 135, 66, 0.1) 0%, transparent 60%); }
+.gradient-gold-bottom { background: radial-gradient(ellipse at bottom, rgba(164, 135, 66, 0.1) 0%, transparent 60%); }
+
+/* Hero image dark overlay */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
 }
 
-.gradient-gold-bottom {
-  background: radial-gradient(ellipse at bottom, rgba(164, 135, 66, 0.08) 0%, transparent 60%);
+/* Product card hover lift */
+.lift-hover {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms ease, border-color 250ms ease;
 }
+.lift-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(164, 135, 66, 0.4);
+}
+
+/* Animated gold underline on links */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: #A48742;
+  transition: width 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after,
+.link-underline[data-active="true"]::after {
+  width: 100%;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility — no scrollbar but scrollable */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Number input — remove default spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
