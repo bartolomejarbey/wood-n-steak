@@ -19,6 +19,18 @@ interface OrderEmailData {
   qrCodeDataUrl?: string;
 }
 
+// HTML entity escape. Prevents stray markup in user-supplied strings from
+// breaking the email layout or injecting tracking pixels / links.
+function esc(value: string | number | null | undefined): string {
+  if (value === null || value === undefined) return "";
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function generateOrderConfirmationEmail(data: OrderEmailData): string {
   const paymentLabel =
     data.paymentMethod === "comgate"
@@ -26,6 +38,34 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
       : data.paymentMethod === "bank_transfer"
         ? "Bankovní převod"
         : "Dobírka";
+
+  const shippingLine =
+    data.shippingCost === 0 ? "ZDARMA" : `${esc(data.shippingCost)} Kč`;
+
+  const itemsRows = data.items
+    .map(
+      (item) => `
+          <tr>
+            <td>${esc(item.name)}</td>
+            <td>${esc(item.quantity)}x</td>
+            <td style="text-align:right">${esc(item.totalPrice)} Kč</td>
+          </tr>`,
+    )
+    .join("");
+
+  // Only accept data URLs for QR — never arbitrary URLs that could be
+  // tracking pixels or exfiltration targets.
+  const qrBlock =
+    data.qrCodeDataUrl &&
+    data.paymentMethod === "bank_transfer" &&
+    data.qrCodeDataUrl.startsWith("data:image/")
+      ? `
+      <div class="qr-section">
+        <h2 style="margin-top:0">QR kód pro platbu</h2>
+        <img src="${esc(data.qrCodeDataUrl)}" alt="QR platba" width="200" height="200" />
+        <p style="font-size:12px;margin-top:10px">Naskenujte QR kód v bankovní aplikaci</p>
+      </div>`
+      : "";
 
   return `
 <!DOCTYPE html>
@@ -54,13 +94,13 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo">WOOD <span>&</span> STEAK</div>
+      <div class="logo">WOOD <span>&amp;</span> STEAK</div>
     </div>
     <div class="content">
       <h1>Děkujeme za objednávku!</h1>
-      <p>Dobrý den, ${data.firstName},</p>
+      <p>Dobrý den, ${esc(data.firstName)},</p>
       <p>vaše objednávka byla úspěšně přijata.</p>
-      <p class="order-number">Číslo objednávky: ${data.orderNumber}</p>
+      <p class="order-number">Číslo objednávky: ${esc(data.orderNumber)}</p>
 
       <h2>Položky objednávky</h2>
       <table>
@@ -72,49 +112,31 @@ export function generateOrderConfirmationEmail(data: OrderEmailData): string {
           </tr>
         </thead>
         <tbody>
-          ${data.items
-            .map(
-              (item) => `
-          <tr>
-            <td>${item.name}</td>
-            <td>${item.quantity}x</td>
-            <td style="text-align:right">${item.totalPrice} Kč</td>
-          </tr>`
-            )
-            .join("")}
+          ${itemsRows}
           <tr>
             <td colspan="2">Doprava</td>
-            <td style="text-align:right">${data.shippingCost === 0 ? "ZDARMA" : data.shippingCost + " Kč"}</td>
+            <td style="text-align:right">${shippingLine}</td>
           </tr>
           <tr class="total-row">
             <td colspan="2">Celkem</td>
-            <td style="text-align:right">${data.total} Kč</td>
+            <td style="text-align:right">${esc(data.total)} Kč</td>
           </tr>
         </tbody>
       </table>
 
       <h2>Doručovací adresa</h2>
-      <p>${data.shippingStreet}<br>${data.shippingCity}, ${data.shippingZip}</p>
+      <p>${esc(data.shippingStreet)}<br>${esc(data.shippingCity)}, ${esc(data.shippingZip)}</p>
 
       <h2>Způsob platby</h2>
-      <p>${paymentLabel}</p>
+      <p>${esc(paymentLabel)}</p>
 
-      ${
-        data.qrCodeDataUrl && data.paymentMethod === "bank_transfer"
-          ? `
-      <div class="qr-section">
-        <h2 style="margin-top:0">QR kód pro platbu</h2>
-        <img src="${data.qrCodeDataUrl}" alt="QR platba" width="200" height="200" />
-        <p style="font-size:12px;margin-top:10px">Naskenujte QR kód v bankovní aplikaci</p>
-      </div>`
-          : ""
-      }
+      ${qrBlock}
 
       <p style="margin-top:30px">Budeme vás kontaktovat ohledně doručení.</p>
-      <p>S pozdravem,<br>tým Wood & Steak</p>
+      <p>S pozdravem,<br>tým Wood &amp; Steak</p>
     </div>
     <div class="footer">
-      <p>Wood & Steak | Vinohrady, Praha 2</p>
+      <p>Wood &amp; Steak | Vinohrady, Praha 2</p>
       <p>info@woodandsteak.cz | www.woodandsteak.cz</p>
     </div>
   </div>
@@ -128,7 +150,6 @@ export function generateSPDString(options: {
   variableSymbol: string;
   message?: string;
 }): string {
-  // SPD format for Czech QR payments
   return [
     "SPD*1.0",
     `ACC:${options.account}`,
