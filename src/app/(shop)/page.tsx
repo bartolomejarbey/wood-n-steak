@@ -2,18 +2,47 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShoppingBag, Truck, CreditCard, Package, MapPin, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getCategories, getFeaturedProducts } from "@/lib/data";
 import ProductCard from "@/components/shop/ProductCard";
-import ImagePlaceholder from "@/components/shop/ImagePlaceholder";
+import { KineticHeading } from "@/components/ui/KineticHeading";
+import { ProcessShowcase } from "@/components/shop/ProcessShowcase";
+import { motion } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 
 const heroImages = [
-  { src: "/images/hero-4.jpg", alt: "Steaky z Wood & Steak" },
-  { src: "/images/hero-3.jpg", alt: "Pokrm z restaurace" },
-  { src: "/images/hero-1.jpg", alt: "Zrací boxy s masem" },
-  { src: "/images/hero-2.jpg", alt: "Interiér restaurace Wood & Steak" },
+  { src: "/images/photos/tbone-grill.jpg", alt: "T-bone steak grilovaný na přímém ohni" },
+  { src: "/images/photos/hero-dryagers.jpg", alt: "Zrací vitríny DRY-AGER s visícím hovězím masem" },
+  { src: "/images/photos/interior-wide.jpg", alt: "Interiér steakhouse Wood & Steak — cihlový valený strop a dřevěné stoly" },
+  { src: "/images/photos/interior-woman-wine.jpg", alt: "Atmosféra restaurace Wood & Steak ve Vinohradech" },
 ];
+
+const categoryImages: Record<string, { src: string; alt: string }> = {
+  steaky: {
+    src: "/images/photos/tbone-grill.jpg",
+    alt: "T-bone steak na grilu — ukázka sortimentu steaků",
+  },
+  "hovezi-maso": {
+    src: "/images/photos/butcher-ribcage.jpg",
+    alt: "Řezník s kusem hovězího žebra v bourárně Wood & Steak",
+  },
+  "domaci-omacky": {
+    src: "/images/photos/food-tartare.jpg",
+    alt: "Hovězí tatarák s domácí omáčkou a žloutkem",
+  },
+  "marinady-a-koreni": {
+    src: "/images/photos/food-skewers-beef.jpg",
+    alt: "Marinované hovězí špízy grilované do křupava",
+  },
+  "noze-a-vybaveni": {
+    src: "/images/photos/chef-flame.jpg",
+    alt: "Kuchař u otevřeného ohně — profesionální vybavení pro steakhouse",
+  },
+  doplnky: {
+    src: "/images/photos/food-salad.jpg",
+    alt: "Salát s grilovaným halloumi — lehký doplněk ke steaku",
+  },
+};
 
 export default function HomePage() {
   const categories = getCategories();
@@ -62,17 +91,6 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black z-[1]" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 z-[1]" />
 
-        {/* Logo top center */}
-        <div className="absolute top-28 left-1/2 -translate-x-1/2 z-10">
-          <Image
-            src="/images/logo.png"
-            alt="Wood & Steak"
-            width={180}
-            height={127}
-            className="opacity-70"
-          />
-        </div>
-
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl text-white leading-[1.1] mb-6">
             Steak jako z restaurace.
@@ -120,72 +138,183 @@ export default function HomePage() {
       </section>
 
       {/* Brand Statement */}
-      <section className="relative bg-black py-24 sm:py-32 overflow-hidden">
-        <div className="relative max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl sm:text-4xl text-cream mb-6">
-            Vítejte na e-shopu Wood&nbsp;&amp;&nbsp;Steak
-          </h2>
-          <div className="w-12 h-px bg-gold/40 mx-auto mb-8" />
-          <p className="font-body text-white/45 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            Steakhouse ve Vinohradech nedaleko Náměstí Míru. Přinášíme vám vše,
-            co potřebujete pro přípravu a grilování dokonalého steaku. Na našem e-shopu
-            najdete pečlivě vybraný sortiment — od kvalitního masa, přes domácí
-            omáčky až po nože a další vybavení pro pravý steakový zážitek.
-          </p>
+      <section className="relative bg-black py-32 sm:py-48 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 50% 0%, rgba(164,135,66,0.18) 0%, transparent 55%)",
+          }}
+        />
+
+        <div className="relative max-w-5xl mx-auto px-4 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="overline inline-block mb-8"
+          >
+            Steakhouse · Vinohrady · od 2018
+          </motion.span>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="font-heading text-6xl sm:text-7xl md:text-8xl text-white leading-[0.95]"
+          >
+            Prémiový steak.
+          </motion.h2>
+          <KineticHeading
+            text="Přímo od zdroje."
+            className="text-6xl sm:text-7xl md:text-8xl text-gradient-gold italic mt-2"
+            stagger={0.1}
+          />
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="w-20 h-px bg-gold mx-auto my-10 origin-left"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="font-body text-white/60 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
+          >
+            Neprodáváme maso. Servírujeme zážitek. Každý steak z&nbsp;naší
+            kuchyně prošel rukama řezníka, zrací komorou a kontrolou kvality,
+            než ho necháme putovat k&nbsp;vám.
+          </motion.p>
         </div>
       </section>
+
+      {/* Process showcase */}
+      <ProcessShowcase />
 
       {/* Kategorie */}
       <section className="relative bg-cream py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
             <span className="font-body text-gold-dark/60 text-xs tracking-[0.3em] uppercase">Nabídka</span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-black mt-2">
-              Sortiment
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl text-black mt-2">
+              Produkty
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {categories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/sortiment/${cat.slug}`}
-                className="group relative overflow-hidden bg-black rounded-2xl"
-              >
-                <ImagePlaceholder
-                  type="category"
-                  className="group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                  text={cat.name}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-2xl" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-heading text-xl text-white mb-1 group-hover:text-gold transition-colors duration-300">
-                    {cat.name}
-                  </h3>
-                  <p className="font-body text-white/40 text-sm line-clamp-1">
-                    {cat.description}
-                  </p>
-                  <div className="w-5 h-px bg-gold/40 mt-4 group-hover:w-10 transition-all duration-500" />
-                </div>
-              </Link>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-5 auto-rows-[180px] sm:auto-rows-[220px]">
+            {categories.map((cat, i) => {
+              // Symmetric layout: big hero (Steaky) + 2 cards top-right, 3 equal bottom
+              const spans = [
+                "col-span-2 md:col-span-4 row-span-2", // 0 Steaky
+                "col-span-2 md:col-span-2 row-span-1", // 1
+                "col-span-2 md:col-span-2 row-span-1", // 2
+                "col-span-2 md:col-span-2 row-span-1", // 3
+                "col-span-2 md:col-span-2 row-span-1", // 4
+                "col-span-2 md:col-span-2 row-span-1", // 5 Doplňky — middle of bottom row
+              ];
+              const span = spans[i] ?? "col-span-2 md:col-span-2 row-span-1";
+              const img = categoryImages[cat.slug];
+              return (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className={span}
+                >
+                  <Link
+                    href={`/sortiment/${cat.slug}`}
+                    className="group relative overflow-hidden bg-black rounded-3xl block h-full"
+                  >
+                    {img ? (
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+                        sizes="(max-width: 768px) 100vw, 66vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-off-black" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10" />
+                    <div className="absolute top-5 left-5 w-10 h-10 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-3 transition-all duration-500">
+                      <ArrowRight className="w-4 h-4 text-gold" strokeWidth={2} />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7">
+                      <span className="font-body text-gold/70 text-[10px] tracking-[0.25em] uppercase">0{i + 1}</span>
+                      <h3 className="mt-2 font-heading text-2xl sm:text-3xl text-white group-hover:text-gold transition-colors duration-300">
+                        {cat.name}
+                      </h3>
+                      <p className="font-body text-white/50 text-sm line-clamp-1 mt-1">
+                        {cat.description}
+                      </p>
+                      <div className="w-8 h-px bg-gold/50 mt-3 group-hover:w-16 transition-all duration-500" />
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Doporučujeme */}
-      <section className="relative bg-forest py-24 sm:py-32 overflow-hidden">
+      <section className="relative bg-black py-28 sm:py-40 overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Výběr</span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-white mt-2">
-              Doporučujeme
-            </h2>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
+            <div>
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="overline"
+              >
+                Doporučujeme
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="mt-3 font-heading text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05]"
+              >
+                Naše nejlepší kousky.
+              </motion.h2>
+            </div>
+            <Link
+              href="/sortiment"
+              className="group inline-flex items-center gap-2 text-white/60 hover:text-gold transition-colors self-start md:self-auto"
+            >
+              <span className="text-xs tracking-[0.25em] uppercase">Všechny produkty</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {featured.slice(0, 8).map((product) => (
-              <ProductCard key={product.id} product={product} variant="dark" />
+            {featured.slice(0, 8).map((product, i) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <ProductCard product={product} variant="dark" />
+              </motion.div>
             ))}
           </div>
 
@@ -205,13 +334,13 @@ export default function HomePage() {
       <section className="bg-cream py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative rounded-2xl overflow-hidden">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
               <Image
-                src="/images/hero-2.jpg"
-                alt="Interiér restaurace Wood & Steak"
-                width={800}
-                height={533}
-                className="w-full h-auto object-cover rounded-2xl"
+                src="/images/photos/interior-bull-logo.jpg"
+                alt="Interiér steakhouse Wood & Steak — dřevěné logo býka na stěně s cihlovým valeným stropem"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
 
@@ -246,105 +375,92 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Jak nakupovat - 3 kroky */}
-      <section className="relative bg-black py-24 sm:py-32 overflow-hidden">
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Jednoduše</span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-white mt-2">
-              Jak nakupovat
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: ShoppingBag,
-                num: "01",
-                title: "Vyberte",
-                desc: "Projděte náš sortiment a vyberte si z prémiových steaků, omáček a dalšího vybavení.",
-              },
-              {
-                icon: CreditCard,
-                num: "02",
-                title: "Objednejte",
-                desc: "Minimální objednávka 500 Kč. Zaplaťte kartou, převodem nebo dobírkou.",
-              },
-              {
-                icon: Truck,
-                num: "03",
-                title: "Doručíme",
-                desc: "Praha a okolí. Vlastní rozvoz s garancí čerstvosti a kvality.",
-              },
-            ].map((step, i) => (
-              <div key={i} className="text-center bg-white/[0.03] rounded-2xl p-8 border border-white/[0.06] hover:border-gold/20 transition-all duration-300">
-                <span className="font-body text-gold/25 text-[11px] tracking-[0.3em] uppercase">{step.num}</span>
-                <div className="w-14 h-14 mx-auto my-5 bg-gold/[0.06] rounded-2xl flex items-center justify-center border border-gold/15">
-                  <step.icon className="w-6 h-6 text-gold/80" strokeWidth={1} />
-                </div>
-                <h3 className="font-heading text-lg text-white mb-3">
-                  {step.title}
-                </h3>
-                <p className="font-body text-white/40 text-sm leading-relaxed">
-                  {step.desc}
+      {/* Jak nakupovat — editorial split */}
+      <section className="relative bg-black overflow-hidden">
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+          {/* Sticky photo panel */}
+          <div className="lg:col-span-5 relative min-h-[320px] lg:min-h-0">
+            <Image
+              src="/images/photos/food-skewers-chicken.jpg"
+              alt="Grilované maso v restauraci Wood & Steak — ilustrace k procesu objednávky"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 42vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/20 to-black/70" />
+            <div className="absolute inset-0 flex flex-col justify-between p-8 sm:p-12">
+              <span className="overline">Jak nakupovat</span>
+              <div>
+                <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl text-white leading-[1.02]">
+                  Od výběru<br />
+                  <span className="italic text-gradient-gold">ke dveřím.</span>
+                </h2>
+                <div className="gold-divider-left mt-6" />
+                <p className="font-body text-white/70 text-sm sm:text-base max-w-sm">
+                  Tři kroky mezi vámi a prvním plátkem steaku.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Doručení a info */}
-      <section className="bg-cream py-24 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <div>
-              <span className="font-body text-gold-dark/60 text-xs tracking-[0.3em] uppercase">Rozvoz</span>
-              <h2 className="font-heading text-3xl sm:text-4xl text-black leading-tight mt-2">
-                Doručujeme
-                <br />
-                po Praze
-              </h2>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Steps panel */}
+          <div className="lg:col-span-7 relative bg-[#0a0a0a] py-16 lg:py-24 px-6 sm:px-10 lg:px-16 flex flex-col justify-center">
+            <ol className="space-y-10 lg:space-y-14 relative">
+              {/* Vertical guide line */}
+              <div className="absolute left-[18px] top-4 bottom-4 w-px bg-white/[0.06]" aria-hidden />
+
               {[
                 {
-                  icon: Package,
-                  title: "Min. objednávka",
-                  desc: "500 Kč",
+                  num: "01",
+                  title: "Vyberte prémiové kousky",
+                  desc: "Projděte si steaky, omáčky, koření a vybavení — každý produkt pečlivě popsán.",
+                  time: "≈ 5 min",
                 },
                 {
-                  icon: Truck,
-                  title: "Doprava",
-                  desc: "Zdarma",
+                  num: "02",
+                  title: "Zaplaťte, jak vám vyhovuje",
+                  desc: "Minimální objednávka 500 Kč. Karta online, převod s QR nebo dobírka.",
+                  time: "Bezpečná platba",
                 },
                 {
-                  icon: MapPin,
-                  title: "Oblasti rozvozu",
-                  desc: "Praha a okolí, Praha-východ, Kladno, Mělník, Nymburk",
+                  num: "03",
+                  title: "Doručíme do 24 hodin",
+                  desc: "Vlastní rozvoz po Praze a okolí. Chlazené boxy, doprava zdarma od 500 Kč.",
+                  time: "Do 24 h",
                 },
-                {
-                  icon: Clock,
-                  title: "Platby",
-                  desc: "Kartou online, bankovní převod, dobírka",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-6 rounded-2xl border border-black/[0.04] hover:border-gold/20 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+              ].map((step, i) => (
+                <motion.li
+                  key={step.num}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative pl-14"
                 >
-                  <div className="w-10 h-10 bg-gold/[0.08] rounded-xl flex items-center justify-center mb-4">
-                    <item.icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
-                  </div>
-                  <h4 className="font-heading text-sm text-black mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="font-body text-black/50 text-sm">
-                    {item.desc}
+                  <span className="absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full border border-gold/40 bg-black font-heading italic text-gold text-lg">
+                    {i + 1}
+                  </span>
+                  <span className="font-body text-white/30 text-[10px] tracking-[0.3em] uppercase">
+                    {step.time}
+                  </span>
+                  <h3 className="mt-1 font-heading text-2xl sm:text-3xl text-white leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 font-body text-white/50 text-sm sm:text-base leading-relaxed max-w-md">
+                    {step.desc}
                   </p>
-                </div>
+                </motion.li>
               ))}
+            </ol>
+
+            <div className="mt-12 pl-14">
+              <Link
+                href="/jak-nakupovat"
+                className="group inline-flex items-center gap-3 font-body text-white/70 hover:text-gold text-sm tracking-[0.2em] uppercase link-underline"
+              >
+                Podrobný průvodce
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </div>
         </div>

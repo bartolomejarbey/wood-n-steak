@@ -55,11 +55,11 @@ export default function SortimentPage() {
   return (
     <main className="min-h-screen bg-off-black">
       {/* Hero */}
-      <section className="relative py-20 sm:py-24 bg-gradient-to-b from-forest via-forest to-off-black">
+      <section className="relative py-20 sm:py-24 bg-black">
         <div className="relative max-w-7xl mx-auto px-4 text-center">
           <span className="font-body text-gold/40 text-xs tracking-[0.3em] uppercase">Nabídka</span>
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-cream mt-2">
-            Sortiment
+            Produkty
           </h1>
           <p className="mt-4 font-body text-cream/50 text-base max-w-md mx-auto">
             Vyberte si z naší nabídky prémiových produktů

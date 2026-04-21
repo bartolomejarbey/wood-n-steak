@@ -35,7 +35,7 @@ const navLinks: Array<{
 }> = [
   { label: "Úvod", href: "/" },
   {
-    label: "Sortiment",
+    label: "Produkty",
     href: "/sortiment",
     children: [
       { label: "Steaky", href: "/sortiment/steaky", Icon: Flame },
@@ -166,15 +166,20 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-[88px]">
-            {/* Logo wordmark */}
+            {/* Logo */}
             <Link
               href="/"
               aria-label="Wood & Steak — domů"
-              className="flex-shrink-0 font-heading font-bold tracking-[0.08em] text-xl sm:text-2xl lg:text-[28px]"
+              className="flex-shrink-0 relative block h-12 w-28 sm:h-14 sm:w-32 lg:h-16 lg:w-40"
             >
-              <span className="text-white">WOOD</span>
-              <span className="text-gold mx-1">&amp;</span>
-              <span className="text-white">STEAK</span>
+              <Image
+                src="/images/logo.png"
+                alt="Wood & Steak"
+                fill
+                priority
+                className="object-contain object-left"
+                sizes="(max-width: 640px) 112px, (max-width: 1024px) 128px, 160px"
+              />
             </Link>
 
             {/* Desktop nav */}
@@ -261,7 +266,7 @@ export default function Header() {
             onMouseEnter={openMega}
             onMouseLeave={scheduleCloseMega}
           >
-            <div className="bg-forest-deep/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+            <div className="bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-3 gap-10">
                 <div>
                   <p className="overline mb-5">Maso a omáčky</p>
@@ -304,7 +309,7 @@ export default function Header() {
                     href="/sortiment"
                     className="mt-8 inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-gold hover:text-gold-light transition-colors"
                   >
-                    Celý sortiment
+                    Všechny produkty
                     <ChevronRight className="h-3 w-3" />
                   </Link>
                 </div>
@@ -317,7 +322,7 @@ export default function Header() {
                         href={`/produkt/${p.slug}`}
                         className="group block rounded-xl overflow-hidden bg-black/30 border border-white/5 hover:border-gold/50 transition-all"
                       >
-                        <div className="aspect-[4/5] relative bg-gradient-to-br from-forest-light to-black overflow-hidden">
+                        <div className="aspect-[4/5] relative bg-gradient-to-br from-[#141414] to-black overflow-hidden">
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="font-heading text-gold/30 text-xs tracking-[0.3em] uppercase">
                               W&amp;S
@@ -374,17 +379,21 @@ export default function Header() {
         />
         <div
           className={cn(
-            "absolute top-0 right-0 h-full w-[88%] max-w-md bg-forest-deep text-cream shadow-2xl transition-transform duration-300",
+            "absolute top-0 right-0 h-full w-[88%] max-w-md bg-black text-cream shadow-2xl transition-transform duration-300",
             mobileOpen ? "translate-x-0" : "translate-x-full",
           )}
           role="dialog"
           aria-label="Mobilní menu"
         >
           <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
-            <span className="font-heading font-bold tracking-[0.08em] text-lg">
-              <span className="text-white">WOOD</span>
-              <span className="text-gold mx-1">&amp;</span>
-              <span className="text-white">STEAK</span>
+            <span className="relative block h-10 w-24" aria-label="Wood & Steak">
+              <Image
+                src="/images/logo.png"
+                alt="Wood & Steak"
+                fill
+                className="object-contain object-left"
+                sizes="96px"
+              />
             </span>
             <button
               onClick={() => setMobileOpen(false)}
@@ -449,7 +458,7 @@ export default function Header() {
                           href={link.href}
                           className="flex items-center justify-between py-3 pl-6 pr-2 text-cream/80 hover:text-gold text-sm"
                         >
-                          <span>Celý sortiment</span>
+                          <span>Všechny produkty</span>
                           <ChevronRight className="h-3 w-3" />
                         </Link>
                         {link.children.map((c) => (
@@ -579,7 +588,7 @@ export default function Header() {
                     onClick={() => setSearchOpen(false)}
                     className="flex items-center gap-4 p-4 rounded-xl bg-off-black/80 border border-white/5 hover:border-gold/50 transition-colors"
                   >
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-forest-light to-black flex items-center justify-center flex-shrink-0">
+                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[#141414] to-black flex items-center justify-center flex-shrink-0">
                       <span className="font-heading text-gold/40 text-[10px] tracking-[0.3em]">
                         W&amp;S
                       </span>

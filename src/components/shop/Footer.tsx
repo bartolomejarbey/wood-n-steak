@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
@@ -62,7 +63,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-forest text-white">
+    <footer className="bg-black text-white">
       {/* Newsletter banner */}
       <div className="bg-black border-t border-b border-gold/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
@@ -107,14 +108,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-flex items-baseline" aria-label="Wood & Steak — domů">
-              <span className="font-heading text-2xl font-bold tracking-[0.08em] text-white">
-                WOOD
-              </span>
-              <span className="font-heading text-2xl font-bold text-gold mx-1">&amp;</span>
-              <span className="font-heading text-2xl font-bold tracking-[0.08em] text-white">
-                STEAK
-              </span>
+            <Link
+              href="/"
+              aria-label="Wood & Steak — domů"
+              className="relative block h-16 w-40"
+            >
+              <Image
+                src="/images/logo.png"
+                alt="Wood & Steak"
+                fill
+                className="object-contain object-left"
+                sizes="160px"
+              />
             </Link>
             <div className="gold-divider ml-0 mr-auto" />
             <p className="mt-5 text-sm text-white/60 leading-relaxed">
@@ -153,7 +158,7 @@ export default function Footer() {
 
           {/* Sortiment */}
           <div>
-            <h4 className="overline mb-5 text-gold">Sortiment</h4>
+            <h4 className="overline mb-5 text-gold">Produkty</h4>
             <ul className="space-y-3">
               {categoryLinks.map((link) => (
                 <li key={link.href}>
@@ -231,7 +236,7 @@ export default function Footer() {
             <p>
               &copy; {new Date().getFullYear()} Wood &amp; Steak s.r.o. · Všechny ceny s DPH
             </p>
-            <p>IČO: 00000000 · DIČ: CZ00000000</p>
+            <p>IČO: doplníme · DIČ: doplníme</p>
           </div>
           <div className="flex items-center gap-4 text-white/60">
             <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 mr-1">

@@ -45,13 +45,13 @@ export const metadata: Metadata = {
     title: "Wood & Steak | Steak jako z restaurace u vás doma",
     description:
       "Prémiové maso, domácí omáčky a vybavení pro přípravu dokonalého steaku. Rozvoz po Praze.",
-    images: [{ url: "/images/hero-1.jpg", width: 1600, height: 900, alt: "Wood & Steak" }],
+    images: [{ url: "/images/photos/tbone-grill.jpg", width: 1920, height: 1280, alt: "Wood & Steak — prémiový steakhouse ve Vinohradech" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Wood & Steak",
     description: "Steak jako z restaurace u vás doma.",
-    images: ["/images/hero-1.jpg"],
+    images: ["/images/photos/tbone-grill.jpg"],
   },
   icons: {
     icon: [

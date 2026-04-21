@@ -11,9 +11,12 @@ import {
 } from "@/lib/data";
 import type { Product } from "@/lib/types";
 import { cn, formatPrice } from "@/lib/utils";
+import { getProductImage } from "@/lib/product-images";
 import { useCart } from "@/context/CartContext";
 import ImagePlaceholder from "@/components/shop/ImagePlaceholder";
 import ProductCard from "@/components/shop/ProductCard";
+import { DryAgingTimeline } from "@/components/product/DryAgingTimeline";
+import { TemperatureGuide } from "@/components/product/TemperatureGuide";
 
 const stockLabels: Record<Product["stock_status"], string> = {
   in_stock: "Skladem",
@@ -83,7 +86,7 @@ export default function ProductDetailPage() {
                 href="/sortiment"
                 className="hover:text-gold transition-colors"
               >
-                Sortiment
+                Produkty
               </Link>
             </li>
             <li className="text-gold/40">/</li>
@@ -110,15 +113,18 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Image gallery - 60% */}
           <div className="lg:col-span-3 rounded-2xl overflow-hidden">
-            {product.image_url ? (
-              <img
-                src={product.image_url}
-                alt={product.name}
-                className="w-full aspect-square object-cover rounded-2xl"
-              />
-            ) : (
-              <ImagePlaceholder type="product" />
-            )}
+            {(() => {
+              const src = getProductImage(product);
+              return src ? (
+                <img
+                  src={src}
+                  alt={product.name}
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
+              ) : (
+                <ImagePlaceholder type="product" className="rounded-2xl" />
+              );
+            })()}
           </div>
 
           {/* Info - 40% */}
@@ -224,6 +230,14 @@ export default function ProductDetailPage() {
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Infographics — dry-aging + temperature */}
+      <section className="max-w-7xl mx-auto px-4 pb-16">
+        <div className="border-t border-white/[0.06] pt-12 space-y-6">
+          <DryAgingTimeline activeDays={28} />
+          <TemperatureGuide />
         </div>
       </section>
 

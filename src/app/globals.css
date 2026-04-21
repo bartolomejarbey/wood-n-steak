@@ -4,9 +4,11 @@
   --color-gold: #A48742;
   --color-gold-light: #C4A865;
   --color-gold-dark: #7A6530;
-  --color-forest: #00221E;
-  --color-forest-deep: #001814;
-  --color-forest-light: #0A2E29;
+  --color-forest: #2E1A12;
+  --color-forest-deep: #1A0D09;
+  --color-forest-light: #3F2619;
+  --color-burgundy: #4A1D1A;
+  --color-copper: #B87333;
   --color-cream: #F5F1E8;
   --color-off-black: #1A1A1A;
   --color-off-white: #FAFAFA;
@@ -232,6 +234,35 @@ input:focus, textarea:focus, select:focus {
 /* Utility — no scrollbar but scrollable */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Gold gradient mesh */
+.mesh-gold {
+  background-color: #1A0D09;
+  background-image:
+    radial-gradient(at 15% 20%, rgba(164,135,66,0.25) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, rgba(184,115,51,0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(164,135,66,0.2) 0px, transparent 55%),
+    radial-gradient(at 10% 90%, rgba(74,29,26,0.35) 0px, transparent 50%);
+}
+
+/* Text gradient gold */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C4A865 0%, #A48742 40%, #D4B874 70%, #7A6530 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Magnetic button glow */
+.glow-gold {
+  box-shadow: 0 0 0 0 rgba(164,135,66,0.5), 0 15px 45px -12px rgba(164,135,66,0.6);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+.glow-gold:hover {
+  box-shadow: 0 0 0 6px rgba(164,135,66,0.15), 0 25px 60px -15px rgba(164,135,66,0.75);
+  transform: translateY(-2px);
+}
 
 /* Number input — remove default spinners */
 input[type="number"]::-webkit-inner-spin-button,

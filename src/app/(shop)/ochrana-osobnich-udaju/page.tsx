@@ -20,7 +20,7 @@ const sections = [
     id: "sprava",
     title: "2. Správce údajů",
     body: [
-      "Wood & Steak s.r.o., Vinohrady, Praha 2, IČO: 00000000, DIČ: CZ00000000.",
+      "Wood & Steak s.r.o., Belgická 24, Praha 2 — Vinohrady, 120 00, IČO: doplníme, DIČ: doplníme.",
       "Kontakt pro ochranu osobních údajů: info@woodandsteak.cz",
     ],
   },

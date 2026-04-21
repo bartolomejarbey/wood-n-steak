@@ -1,16 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { Minus, Plus, X, ShoppingBag } from "lucide-react";
+import { Minus, Plus, X, ShoppingBag, Truck, Check } from "lucide-react";
+import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { formatPrice, cn } from "@/lib/utils";
 import ImagePlaceholder from "@/components/shop/ImagePlaceholder";
 
 const MIN_ORDER = 500;
+const FREE_SHIPPING = 1500;
 
 export default function KosikPage() {
   const { items, updateQuantity, removeItem, subtotal } = useCart();
   const isUnderMin = subtotal < MIN_ORDER;
+  const toFreeShipping = Math.max(0, FREE_SHIPPING - subtotal);
+  const hasFreeShipping = subtotal >= FREE_SHIPPING;
+  const shippingProgress = Math.min(100, (subtotal / FREE_SHIPPING) * 100);
 
   if (items.length === 0) {
     return (
@@ -42,6 +47,48 @@ export default function KosikPage() {
           <h1 className="font-heading text-3xl sm:text-4xl text-cream mt-1">
             Košík
           </h1>
+        </div>
+
+        {/* Free shipping progress bar */}
+        <div className="mb-8 rounded-2xl border border-gold/20 bg-black/30 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            {hasFreeShipping ? (
+              <>
+                <div className="w-8 h-8 rounded-full bg-gold/15 border border-gold/40 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-gold" strokeWidth={2.5} />
+                </div>
+                <p className="font-body text-sm text-white">
+                  <span className="text-gold font-semibold">Gratulujeme!</span> Máte dopravu zdarma.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center">
+                  <Truck className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                </div>
+                <p className="font-body text-sm text-white/80">
+                  Do dopravy zdarma vám chybí{" "}
+                  <span className="text-gold font-semibold">{formatPrice(toFreeShipping)}</span>
+                </p>
+              </>
+            )}
+          </div>
+          <div className="relative h-2 bg-white/[0.06] rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${shippingProgress}%` }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-gold-dark via-gold to-gold-light rounded-full"
+              style={{
+                backgroundSize: "200% 100%",
+                animation: hasFreeShipping ? "shimmer 3s linear infinite" : undefined,
+              }}
+            />
+          </div>
+          <div className="flex justify-between mt-2 text-[10px] tracking-[0.15em] uppercase text-white/40">
+            <span>0 Kč</span>
+            <span className={hasFreeShipping ? "text-gold" : ""}>{formatPrice(FREE_SHIPPING)}</span>
+          </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">

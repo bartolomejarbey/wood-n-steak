@@ -79,14 +79,14 @@ export default function CategoryPage() {
   return (
     <main className="min-h-screen bg-off-black">
       {/* Hero */}
-      <section className="relative py-20 sm:py-24 bg-gradient-to-b from-forest via-forest to-off-black">
+      <section className="relative py-20 sm:py-24 bg-black">
         <div className="relative max-w-7xl mx-auto px-4 text-center">
           {/* Breadcrumb */}
           <nav className="mb-6">
             <ol className="flex items-center justify-center gap-2 font-body text-xs text-white/35">
               <li>
                 <Link href="/sortiment" className="hover:text-gold transition-colors">
-                  Sortiment
+                  Produkty
                 </Link>
               </li>
               <li className="text-white/20">/</li>

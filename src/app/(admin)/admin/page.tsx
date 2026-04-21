@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/utils";
 import { ShoppingCart, DollarSign, Package, Users } from "lucide-react";
+import { RevenueChart } from "@/components/admin/RevenueChart";
 
 const stats = [
   {
@@ -107,6 +108,9 @@ export default function AdminDashboard() {
           );
         })}
       </div>
+
+      {/* Revenue chart */}
+      <RevenueChart />
 
       {/* Recent orders */}
       <div className="rounded-xl border border-gold/10 bg-off-black">

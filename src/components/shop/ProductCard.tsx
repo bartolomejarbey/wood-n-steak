@@ -5,6 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/lib/types";
+import { getProductImage } from "@/lib/product-images";
 import ImagePlaceholder from "./ImagePlaceholder";
 
 interface ProductCardProps {
@@ -16,6 +17,7 @@ export default function ProductCard({ product, variant = "dark" }: ProductCardPr
   const { addItem } = useCart();
 
   const isDark = variant === "dark";
+  const imageSrc = getProductImage(product);
 
   return (
     <div
@@ -27,18 +29,15 @@ export default function ProductCard({ product, variant = "dark" }: ProductCardPr
     >
       <Link href={`/produkt/${product.slug}`}>
         {/* Image */}
-        <div className="relative overflow-hidden">
-          {product.image_url ? (
+        <div className="relative overflow-hidden aspect-square">
+          {imageSrc ? (
             <img
-              src={product.image_url}
+              src={imageSrc}
               alt={product.name}
-              className="w-full aspect-square object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
             />
           ) : (
-            <ImagePlaceholder
-              type="product"
-              className="group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-            />
+            <ImagePlaceholder type="square" className="rounded-none" />
           )}
 
           {/* Gradient overlay on image */}
