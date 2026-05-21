@@ -17,9 +17,6 @@ import {
   Flame,
   Beef,
   Droplet,
-  Sparkles,
-  Utensils,
-  Package,
 } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { useCart } from "@/context/CartContext";
@@ -41,9 +38,6 @@ const navLinks: Array<{
       { label: "Steaky", href: "/sortiment/steaky", Icon: Flame },
       { label: "Hovězí maso", href: "/sortiment/hovezi-maso", Icon: Beef },
       { label: "Domácí omáčky", href: "/sortiment/domaci-omacky", Icon: Droplet },
-      { label: "Marinády a koření", href: "/sortiment/marinady-a-koreni", Icon: Sparkles },
-      { label: "Nože a vybavení", href: "/sortiment/noze-a-vybaveni", Icon: Utensils },
-      { label: "Doplňky", href: "/sortiment/doplnky", Icon: Package },
     ],
   },
   { label: "Jak nakupovat", href: "/jak-nakupovat" },
@@ -267,31 +261,12 @@ export default function Header() {
             onMouseLeave={scheduleCloseMega}
           >
             <div className="bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
-              <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-3 gap-10">
+              <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-2 gap-10">
                 <div>
-                  <p className="overline mb-5">Maso a omáčky</p>
+                  <p className="overline mb-5">Sortiment</p>
                   <ul className="space-y-3">
-                    {navLinks[1].children!.slice(0, 4).map((c) => {
+                    {navLinks[1].children!.map((c) => {
                       const Icon = c.Icon ?? Flame;
-                      return (
-                        <li key={c.href}>
-                          <Link
-                            href={c.href}
-                            className="group flex items-center gap-3 text-white/85 hover:text-gold transition-colors"
-                          >
-                            <Icon className="h-4 w-4 text-gold/70 group-hover:text-gold" strokeWidth={1.5} />
-                            <span className="text-sm font-medium tracking-wide">{c.label}</span>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <p className="overline mb-5">Vybavení</p>
-                  <ul className="space-y-3">
-                    {navLinks[1].children!.slice(4).map((c) => {
-                      const Icon = c.Icon ?? Package;
                       return (
                         <li key={c.href}>
                           <Link
@@ -323,11 +298,21 @@ export default function Header() {
                         className="group block rounded-xl overflow-hidden bg-black/30 border border-white/5 hover:border-gold/50 transition-all"
                       >
                         <div className="aspect-[4/5] relative bg-gradient-to-br from-[#141414] to-black overflow-hidden">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="font-heading text-gold/30 text-xs tracking-[0.3em] uppercase">
-                              W&amp;S
-                            </span>
-                          </div>
+                          {p.image_url ? (
+                            <Image
+                              src={p.image_url}
+                              alt={p.name}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              sizes="200px"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="font-heading text-gold/30 text-xs tracking-[0.3em] uppercase">
+                                W&amp;S
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <div className="p-3">
                           <div className="font-heading text-[13px] text-white/90 group-hover:text-gold transition-colors line-clamp-1">
@@ -588,10 +573,20 @@ export default function Header() {
                     onClick={() => setSearchOpen(false)}
                     className="flex items-center gap-4 p-4 rounded-xl bg-off-black/80 border border-white/5 hover:border-gold/50 transition-colors"
                   >
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[#141414] to-black flex items-center justify-center flex-shrink-0">
-                      <span className="font-heading text-gold/40 text-[10px] tracking-[0.3em]">
-                        W&amp;S
-                      </span>
+                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[#141414] to-black flex items-center justify-center flex-shrink-0 overflow-hidden relative">
+                      {p.image_url ? (
+                        <Image
+                          src={p.image_url}
+                          alt={p.name}
+                          fill
+                          className="object-cover"
+                          sizes="56px"
+                        />
+                      ) : (
+                        <span className="font-heading text-gold/40 text-[10px] tracking-[0.3em]">
+                          W&amp;S
+                        </span>
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-heading text-white truncate">{p.name}</div>

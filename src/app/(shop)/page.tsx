@@ -23,24 +23,12 @@ const categoryImages: Record<string, { src: string; alt: string }> = {
     alt: "T-bone steak na grilu — ukázka sortimentu steaků",
   },
   "hovezi-maso": {
-    src: "/images/photos/butcher-ribcage.jpg",
-    alt: "Řezník s kusem hovězího žebra v bourárně Wood & Steak",
-  },
-  "domaci-omacky": {
-    src: "/images/photos/food-tartare.jpg",
-    alt: "Hovězí tatarák s domácí omáčkou a žloutkem",
-  },
-  "marinady-a-koreni": {
     src: "/images/photos/food-skewers-beef.jpg",
     alt: "Marinované hovězí špízy grilované do křupava",
   },
-  "noze-a-vybaveni": {
-    src: "/images/photos/chef-flame.jpg",
-    alt: "Kuchař u otevřeného ohně — profesionální vybavení pro steakhouse",
-  },
-  doplnky: {
-    src: "/images/photos/food-salad.jpg",
-    alt: "Salát s grilovaným halloumi — lehký doplněk ke steaku",
+  "domaci-omacky": {
+    src: "/images/photos/food-tartare.jpg",
+    alt: "Steak s domácí bylinkovou omáčkou chimichurri",
   },
 };
 
@@ -215,14 +203,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-5 auto-rows-[180px] sm:auto-rows-[220px]">
             {categories.map((cat, i) => {
-              // Symmetric layout: big hero (Steaky) + 2 cards top-right, 3 equal bottom
+              // 3-category layout: big hero (Steaky) + 2 cards stacked on the right
               const spans = [
                 "col-span-2 md:col-span-4 row-span-2", // 0 Steaky
-                "col-span-2 md:col-span-2 row-span-1", // 1
-                "col-span-2 md:col-span-2 row-span-1", // 2
-                "col-span-2 md:col-span-2 row-span-1", // 3
-                "col-span-2 md:col-span-2 row-span-1", // 4
-                "col-span-2 md:col-span-2 row-span-1", // 5 Doplňky — middle of bottom row
+                "col-span-2 md:col-span-2 row-span-1", // 1 Hovězí maso
+                "col-span-2 md:col-span-2 row-span-1", // 2 Domácí omáčky
               ];
               const span = spans[i] ?? "col-span-2 md:col-span-2 row-span-1";
               const img = categoryImages[cat.slug];

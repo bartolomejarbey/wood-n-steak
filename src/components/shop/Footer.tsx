@@ -19,9 +19,6 @@ const categoryLinks = [
   { label: "Steaky", href: "/sortiment/steaky" },
   { label: "Hovězí maso", href: "/sortiment/hovezi-maso" },
   { label: "Domácí omáčky", href: "/sortiment/domaci-omacky" },
-  { label: "Marinády a koření", href: "/sortiment/marinady-a-koreni" },
-  { label: "Nože a vybavení", href: "/sortiment/noze-a-vybaveni" },
-  { label: "Doplňky", href: "/sortiment/doplnky" },
 ];
 
 const infoLinks = [
