@@ -233,13 +233,15 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* Infographics — dry-aging + temperature */}
-      <section className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="border-t border-white/[0.06] pt-12 space-y-6">
-          <DryAgingTimeline activeDays={28} />
-          <TemperatureGuide />
-        </div>
-      </section>
+      {/* Infographics — dry-aging + temperature (steaks only) */}
+      {category?.slug === "steaky" && (
+        <section className="max-w-7xl mx-auto px-4 pb-16">
+          <div className="border-t border-white/[0.06] pt-12 space-y-6">
+            <DryAgingTimeline activeDays={28} />
+            <TemperatureGuide />
+          </div>
+        </section>
+      )}
 
       {/* Related products */}
       {relatedProducts.length > 0 && (

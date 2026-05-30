@@ -30,6 +30,10 @@ const categoryImages: Record<string, { src: string; alt: string }> = {
     src: "/images/photos/food-tartare.jpg",
     alt: "Steak s domácí bylinkovou omáčkou chimichurri",
   },
+  doplnky: {
+    src: "/images/products/bbq-grilovaci-set-pro.jpg",
+    alt: "Grilovací set Wood & Steak — nerezová obracečka, kleště a vidlice s černými rukojeťmi",
+  },
 };
 
 export default function HomePage() {
@@ -203,11 +207,13 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-5 auto-rows-[180px] sm:auto-rows-[220px]">
             {categories.map((cat, i) => {
-              // 3-category layout: big hero (Steaky) + 2 cards stacked on the right
+              // Bento layout: big hero (Steaky) + 2 cards stacked on the right,
+              // then a full-width band for any further categories (Doplňky).
               const spans = [
                 "col-span-2 md:col-span-4 row-span-2", // 0 Steaky
                 "col-span-2 md:col-span-2 row-span-1", // 1 Hovězí maso
                 "col-span-2 md:col-span-2 row-span-1", // 2 Domácí omáčky
+                "col-span-2 md:col-span-6 row-span-1", // 3 Doplňky (full-width band)
               ];
               const span = spans[i] ?? "col-span-2 md:col-span-2 row-span-1";
               const img = categoryImages[cat.slug];
