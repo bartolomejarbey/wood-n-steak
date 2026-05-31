@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/Toaster";
+import { SITE, siteUrl } from "@/lib/seo";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -17,17 +18,13 @@ const dmSans = DM_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") || "http://localhost:3000";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteUrl()),
   title: {
     default: "Wood & Steak | Steak jako z restaurace u vás doma",
     template: "%s | Wood & Steak",
   },
-  description:
-    "Prémiové maso, domácí omáčky, koření a vybavení pro přípravu dokonalého steaku. E-shop steakhouse Wood & Steak z Vinohrad — rozvážíme po Praze, doprava zdarma od 500 Kč.",
+  description: SITE.description,
   keywords: [
     "steak e-shop Praha",
     "hovězí maso Vinohrady",
@@ -40,11 +37,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "cs_CZ",
-    url: siteUrl,
+    url: siteUrl(),
     siteName: "Wood & Steak",
     title: "Wood & Steak | Steak jako z restaurace u vás doma",
-    description:
-      "Prémiové maso, domácí omáčky a vybavení pro přípravu dokonalého steaku. Rozvoz po Praze.",
+    description: SITE.description,
     images: [{ url: "/images/photos/tbone-grill.jpg", width: 1920, height: 1280, alt: "Wood & Steak — prémiový steakhouse ve Vinohradech" }],
   },
   twitter: {
@@ -54,17 +50,19 @@ export const metadata: Metadata = {
     images: ["/images/photos/tbone-grill.jpg"],
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

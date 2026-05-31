@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowUpRight, ExternalLink, Utensils } from "lucide-react";
 import { StoryTimeline } from "@/components/shop/StoryTimeline";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "O restauraci",
+  description:
+    "Wood & Steak je steakhouse ve Vinohradech od roku 2018. Dry-aging, otevřený oheň a poctivé maso. Náš příběh, kuchyně a e-shop s rozvozem po Praze.",
+  path: "/o-restauraci",
+});
 
 export default function AboutPage() {
   return (

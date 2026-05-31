@@ -17,6 +17,7 @@ import {
   Flame,
   Beef,
   Droplet,
+  Utensils,
 } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 import { useCart } from "@/context/CartContext";
@@ -38,6 +39,7 @@ const navLinks: Array<{
       { label: "Steaky", href: "/sortiment/steaky", Icon: Flame },
       { label: "Hovězí maso", href: "/sortiment/hovezi-maso", Icon: Beef },
       { label: "Domácí omáčky", href: "/sortiment/domaci-omacky", Icon: Droplet },
+      { label: "Doplňky", href: "/sortiment/doplnky", Icon: Utensils },
     ],
   },
   { label: "Jak nakupovat", href: "/jak-nakupovat" },

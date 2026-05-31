@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Minus, Plus } from "lucide-react";
 import {
@@ -116,10 +117,14 @@ export default function ProductDetailPage() {
             {(() => {
               const src = getProductImage(product);
               return src ? (
-                <img
+                <Image
                   src={src}
                   alt={product.name}
-                  className="w-full aspect-square object-cover rounded-2xl"
+                  width={1024}
+                  height={1024}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  priority
+                  className="w-full h-auto aspect-square object-cover rounded-2xl"
                 />
               ) : (
                 <ImagePlaceholder type="product" className="rounded-2xl" />

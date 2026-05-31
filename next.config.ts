@@ -47,6 +47,13 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  images: {
+    // AVIF first lets the optimizer pick the smallest format per browser.
+    formats: ["image/avif", "image/webp"],
+    qualities: [60, 70, 75],
+    // 30-day cache for optimized images cuts re-optimization.
+    minimumCacheTTL: 2592000,
+  },
   async headers() {
     return [
       {

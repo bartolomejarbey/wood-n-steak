@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Ochrana osobních údajů",
   description:
-    "Zásady zpracování osobních údajů společnosti Wood & Steak s.r.o. v souladu s nařízením GDPR.",
-};
+    "Zásady zpracování osobních údajů Wood & Steak s.r.o. v souladu s GDPR. Jaké údaje zpracováváme, za jakým účelem, vaše práva a kontakt.",
+  path: "/ochrana-osobnich-udaju",
+});
 
 const sections = [
   {

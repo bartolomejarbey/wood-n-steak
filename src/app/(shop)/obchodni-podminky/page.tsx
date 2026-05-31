@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Obchodní podmínky",
   description:
     "Obchodní podmínky e-shopu Wood & Steak s.r.o. pro nákup hovězího masa, dry-aged steaků, omáček a vybavení. Platné od května 2026.",
-};
+  path: "/obchodni-podminky",
+});
 
 const sections = [
   {
